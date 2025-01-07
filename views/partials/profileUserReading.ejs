@@ -1,0 +1,85 @@
+<section class="content-info" id="content4">
+    <div class="reading-list-content">
+        <!-- <div class="title">
+                    <h2>Reading List ()</h2>
+                </div> -->
+        <div class="books">
+            <% readingBooks.forEach(function(book, index){ %>
+                <div class="single-book">
+                    <div class="book">
+                        <%if(usersProfile.user.toString() !==user._id.toString() ){%>
+                            <form action="/books/addReadingProfile" method="POST" enctype="multipart/form-data">
+                                <input type="hidden" name="bookTitle" class="editBookTitle" value="<%= book.title%>">
+                                <input type="hidden" name="bookAuthor" class="editBookAuthor"
+                                    value="<%= book.author%>"><input type="hidden" class="editBookSynopsis"
+                                    name="bookSynopsis" value="<%= book.synopsis%>">
+                                <input type="hidden" name="bookCoverPhoto" value="<%= book.bookCoverPhoto%>"
+                                    class="editBookCoverPhoto">
+                                <input type="hidden" name="bookGenres" value="<%= book.genres%>" class="editBookGenres">
+                                <%if (myBooks.some(sbook=> sbook.title === book.title)) {%>
+                                    <!-- Show checkmark if the book is already added -->
+                                    <a class="bookAdded" aria-label="Book Has Been Added">
+                                        <i class="fa-solid fa-circle-check"></i>
+                                    </a>
+                                    <% } else { %>
+                                        <button class="bookSubmitBtn addBookProfile" aria-label="Add Book" type="submit"
+                                            value="Save">
+                                            <i class="fa-solid fa-circle-plus"></i>
+                                        </button>
+                                        <%}%>
+                            </form>
+                            <%}%>
+                                <div class="book-section">
+                                    <div class="book-photo">
+                                        <img src="<%= book.bookCoverPhoto%>">
+                                    </div>
+                                    <div class="book-info">
+                                        <h4 class="book-title">
+                                            <%= book.title%>
+                                        </h4>
+                                        <h4 class="book-author">
+                                            <%= book.author%>
+                                        </h4>
+                                        <p>Synopsis: <span class="book-caption">
+                                                <% if (book.synopsis.length> 300) { %>
+                                                    <% const truncatedSynopsis=book.synopsis.substring(0, 300); %>
+                                                        <span id="truncatedSynopsis <%= book._id %>">
+                                                            <%= truncatedSynopsis.substr(0,
+                                                                truncatedSynopsis.lastIndexOf(' ')) %></span>
+                                                                                                <span id="fullSynopsis <%= book._id %>" style="display: none;">
+                                                    <%= book.synopsis %>
+                                                </span>
+                                                <span onclick="toggleSynopsis(' <%=book._id %>')" class="read-more-btn"
+                                                                id="readMoreBtn <%= book._id %>">...
+                                                                    <span>Read More</span>
+                                                        </span>
+                                                        <span onclick="toggleSynopsis(' <%= book._id %>')"
+                                                            class="read-less-btn" style="display: none;"
+                                                            id="readLessBtn <%= book._id %>">
+                                                            Read Less
+                                                        </span>
+                                                        <% } else { %>
+                                                            <%= book.synopsis %>
+                                                                <% } %>
+                                            </span>
+                                        </p>
+                                        <p class="date">Date Added: <span class="date-added">
+                                                <%=createdReadingDates[index]%>
+                                            </span></p>
+                                    </div>
+                                </div>
+                                <div class="book-genres">
+                                    <% if (book.genres && book.genres.length> 0) { %>
+                                        <% book.genres.forEach((genre)=> { %>
+                                            <span class="genre">
+                                                <%= genre %>
+                                            </span>
+                                            <% }) %>
+                                                <% } %>
+                                </div>
+                    </div>
+                </div>
+                <% }) %>
+        </div>
+    </div>
+</section>

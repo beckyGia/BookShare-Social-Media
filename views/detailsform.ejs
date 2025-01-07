@@ -1,0 +1,232 @@
+<section class="details-page">
+    <div class="form-outer">
+        <div class="details-container">
+            <form id="detailsProfileForm" action="/auth/details" enctype="multipart/form-data" method="POST">
+                <div class="pages">
+                    <div id="firstPage" class="page one active">
+                        <div class="slide-page">
+                            <div class="header-details header-1">
+                                <p>
+                                    STEP: 1 OF 3
+                                </p>
+                                <div class="header-progress">
+                                    <h3>Your Profile</h3>
+                                    <div class="progress">
+                                        <progress class="progress progress1" min="0" value="33" max="100"></progress>
+                                        <h4>33%</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="profile-pic">
+                                <img src="" alt="Profile picture preview" class="imagePreview">
+                                <a class="action-button mode-upload"><i class="fa-solid fa-camera"></i> Browse
+                                    Photo</a>
+                                <input type="file" class="hidden" name="file" id="imageUpload" required />
+                                <p>Click to add profile picture<span class="req-red" title="Required">*</span></p>
+                            </div>
+                            <div class="field">
+                                <label for="firstName" class="form-label">First Name<span class="req-red"
+                                        title="Required">*</span></label>
+                                <input type="text" class="form-control" id="firstName" name="firstName"
+                                    placeholder="Enter your first name..." required />
+                            </div>
+                            <div class="field">
+                                <label for="lastName" class="form-label">Last Name<span class="req-red"
+                                        title="Required">*</span></label>
+                                <input type="text" class="form-control" id="lastName" name="lastName"
+                                    placeholder="Enter your last name..." required />
+                            </div>
+                            <div class="field">
+                                <label for="phoneNumber" class="form-label">Phone Number <span>Format:
+                                        123-456-7890</span></label>
+                                <input type="tel" class="form-control" id="phoneNumber" name="phoneNumber"
+                                    placeholder="Enter your phone number..." pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" />
+
+                            </div>
+                            <div class="field field-btn">
+                                <a id="firstNext" class="firstNext next">Next</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="secondPage" class="page two">
+                        <div class="slide-page">
+                            <div class="header-details header-2">
+                                <p>
+                                    STEP: 2 OF 3
+                                </p>
+                                <div class="header-progress">
+                                    <h3>Personal Info</h3>
+                                    <div class="progress">
+                                        <progress class="progress progress1" min="0" value="66" max="100"></progress>
+                                        <h4>66%</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="field-second">
+                                <div class="date">
+                                    <div class="date-title">
+                                        <h4>Date of Birth<span class="req-red" title="Required">*</span></h4>
+
+                                    </div>
+                                    <div class="date-inputs">
+                                        <div class="field-inline-block">
+                                            <label for="birthDay" class="form-label">DD</label>
+                                            <input type="text" pattern="[0-9]*" maxlength="2" size="2"
+                                                class="date-field form-control" id="birthDay" name="birthDay" min="01"
+                                                max="31" required />
+                                        </div>
+                                        /
+                                        <div class="field-inline-block">
+                                            <label for="birthMonth" class="form-label">MM</label>
+                                            <input type="text" maxlength="2" size="2" min="1" max="12"
+                                                class="date-field form-control" id="birthMonth" name="birthMonth"
+                                                required />
+                                        </div> /
+                                        <div class="field-inline-block"><label for="birthYear"
+                                                class="form-label">YYYY</label>
+                                            <input type="text" pattern="[0-9]*" maxlength="4" size="4"
+                                                class="date-field date-field--year form-control" id="birthYear"
+                                                name="birthYear" required />
+                                        </div>
+                                    </div>
+                                </div>
+                                <p><small>E.g. 26/04/1980</small></p>
+                            </div>
+                            <div class="field">
+                                <label for="gender" class="form-label">
+                                    <h4>Gender<span class="req-red" title="Required">*</span></h4>
+                                </label>
+                                <div class="field-gender">
+                                    <div class="field-gender-selection">
+                                        <div class="gender-section">
+                                            <input type="radio" class="form-control" id="male" value="Male"
+                                                name="gender" required />
+                                            <label class="gender-name" for="male">Male</label>
+                                        </div>
+                                        <div class="gender-section">
+                                            <input type="radio" class="form-control" id="female" value="Female"
+                                                name="gender" />
+                                            <label for="female" class="gender-name">Female</label>
+                                        </div>
+                                        <div class="gender-section">
+                                            <input type="radio" class="form-control" id="transgender"
+                                                value="Transgender" name="gender" />
+                                            <label for="transgender" class="gender-name">Transgender</label>
+                                        </div>
+                                    </div>
+                                    <div class="field-gender-selection">
+                                        <div class="gender-section">
+                                            <input type="radio" class="form-control" id="nonbinary" value="Nonbinary"
+                                                name="gender" />
+                                            <label for="nonbinary" class="gender-name">Nonbinary</label>
+                                        </div>
+                                        <div class="gender-section">
+                                            <input type="radio" class="form-control" id="other" value="Other"
+                                                name="gender" />
+                                            <label for="other" class="gender-name">Other</label>
+                                        </div>
+                                        <div class="gender-section">
+                                            <input type="radio" class="form-control" value="Prefer not to say"
+                                                name="gender" id="prefer" />
+                                            <label for="prefer" class="gender-name">Prefer not to say</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="field field-pronouns">
+                                <label for="pronoun" class="form-label">
+                                    <h4>Pronouns<span class="req-red" title="Required">*</span></h4>
+                                </label>
+                                <select name="pronoun" id="pronoun" required>
+                                    <option value="" selected disabled>Choose which pronouns you use</option>
+                                    <option value="Feminine">Feminine: "Wish her a happy birthday!"</option>
+                                    <option value="Masculine">Masculine: "Wish him a happy birthday!"</option>
+                                    <option value="Neutral">Neutral: "Wish them a happy birthday!"</option>
+                                </select>
+                            </div>
+                            <div class="field field-status">
+                                <label for="status" class="form-label">
+                                    <h4>Profile Status<span class="req-red" title="Required">*</span></h4>
+                                </label>
+                                <select name="status" id="status" required>
+                                    <option value="" selected disabled>Choose which status</option>
+                                    <option value="Public">Public: "Everyone can see your profile"</option>
+                                    <option value="Private">Private: "Only friends can see your profile"</option>
+                                </select>
+                            </div>
+                            <div class="field btns field-btns2">
+                                <a id="firstPrev" class="prev-1 prev">Previous</a>
+                                <a class="next-1 next" id="secondNext">Next</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="thirdPage" class="page three">
+                        <div class="slide-page">
+                            <div class="header-details header-3">
+                                <p>
+                                    STEP: 3 OF 3
+                                </p>
+                                <div class="header-progress">
+                                    <h3>Your Profile</h3>
+                                    <div class="progress">
+                                        <progress class="progress progress1" min="0" value="100"
+                                            max="100"></progress>100%
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="field-third bio-title">
+                                <label for="bio">
+                                    <h4>Bio<span class="req-red" title="Required">*</span></h4>
+                                </label>
+                                <div class="input-box-bio">
+                                    <textarea name="bio" id="bio" placeholder="Describe who you are"
+                                        required></textarea>
+                                    <div class="characters">
+                                        <span class="signal_num">0</span>
+                                        <span class="limit_num">/100</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="field-third hobbies-field">
+                                <label for="hobbies">
+                                    <h4>Hobbies</h4>
+                                </label>
+                                <div class="inner">
+                                    <input type="text" class="hobbyInput hobbies-input" name="visibleHobbies"
+                                        placeholder="List One Hobby Example: Dancing">
+
+                                    <button type="button" class="buttonTheme hobbyBtn">Add</button>
+
+                                </div>
+
+                                <ul class="hobbiesList">
+                                </ul>
+                                <!-- Hidden input field for form submission -->
+                                <input type="hidden" name="hobbies" id="hiddenHobbiesInput" value="" />
+                            </div>
+                            <div class="field-third">
+                                <div class="cover-photo">
+                                    <h4>Cover Photo</h4>
+                                    <div class="input-file-container">
+                                        <label for="imgUpload" class="input-file-trigger">
+                                            Select A File..
+                                        </label>
+                                        <input type="file" class="form-control input-file" id="imgUpload"
+                                            name="coverFile">
+                                    </div>
+                                </div>
+                                <p class="file-return"></p>
+                            </div>
+                            <div class="field field-btns3 btns">
+                                <a id="secondPrev" class="prev-2 prev">Previous</a>
+                                <button id="detailsSubmitBtn" class="submit">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+        </form>
+    </div>
+    </div>
+</section>

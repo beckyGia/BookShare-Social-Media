@@ -1,0 +1,375 @@
+<% function renderComments(comments) { %>
+    <% if (comments.length> 0) { %>
+        <% comments.forEach((comment, index)=> { %>
+            <%if(comment.deleted===true){%>
+                <li class="box_result comment-response-row">
+                    <div class="empty-avatar_comment"></div>
+                    <div class="result_comment">
+                        <div class="result_comment-container deleted-container">
+                            <div class="result_comment-header">
+                                <p class="comment-deleted">
+                                    <%= comment.caption %>
+                                </p>
+                            </div>
+                        </div>
+                        <ul class="child_replay">
+                            <%- renderComments(comment.comments) %>
+                        </ul>
+                    </div>
+                </li>
+                <%} else {%>
+                    <li class="box_result comment-response-row">
+                        <div class="avatar_comment">
+                            <img src="<%= comment.userProfile.profilePic %>" alt="Profile-Picture" />
+                        </div>
+                        <div class="result_comment">
+                            <div class="result_comment-container">
+                                <% if (comment.caption) { %>
+                                    <div class="result_comment-header">
+                                        <h4>
+                                            <%= comment.userProfile.fullName %>
+                                        </h4>
+                                        <p>
+                                            <%= comment.caption %>
+                                        </p>
+                                    </div>
+                                    <% } else { %>
+                                        <div class="result_comment-header-noText">
+                                            <h4>
+                                                <%= comment.userProfile.fullName %>
+                                            </h4>
+                                        </div>
+                                        <% } %>
+                                            <% if (comment.mediaType==='image' ) { %>
+                                                <div class="image-container">
+                                                    <img src="<%= comment.photo.image %>"
+                                                        alt="<%= comment.photo.cloudinary %>">
+                                                </div>
+                                                <% } else if (comment.mediaType==='gif' ) { %>
+                                                    <div class="gif-container">
+                                                        <img src="<%= comment.gif.image %>"
+                                                            alt="<%= comment.gif.cloudinary %>">
+                                                    </div>
+                                                    <% } %>
+                                                        <div class="tools_comment">
+                                                            <div class="time">
+                                                                <span class="posted-time">
+                                                                    <% if (comment.updatedAt> comment.createdAt) {
+                                                                        %>
+                                                                        UPDATED <%-
+                                                                            comment.formattedUpdatedAt.toUpperCase() %>
+                                                                            <% } else { %>
+                                                                                <%- comment.formattedCreatedAt.toUpperCase()
+                                                                                    %>
+                                                                                    <% } %>
+                                                                </span>
+                                                            </div>
+                                                            <div class="tools-btn">
+                                                                <a class="reply-dashboard"
+                                                                    data-user-profile-pic="<%= comment.userProfile.profilePic %>"
+                                                                    data-post-id="<%= post._id %>"
+                                                                    data-comment-id="<%= comment._id %>">Reply</a>
+                                                                <%if (comment.user._id==user.id){%>
+                                                                    <span aria-hidden="true"> · </span>
+                                                                    <a class="edit-dashboard"
+                                                                        data-post-id="<%= post._id %>"
+                                                                        data-comment-id="<%= comment._id %>"
+                                                                        data-comment-caption="<%= comment.caption%>"
+                                                                        data-comment-photo="<%=comment.photo.image%>"
+                                                                        data-comment-photo-cloudinary="<%=comment.photo.cloudinary%>"
+                                                                        data-comment-gif="<%=comment.gif.image%>"
+                                                                        data-comment-gif-cloudinary="<%=comment.gif.cloudinary%>">Edit</a>
+                                                                    <span aria-hidden="true"> · </span>
+                                                                    <form
+                                                                        action="/comment/deleteCommentDashboard/<%= post._id %>/<%= comment.id %>?_method=DELETE"
+                                                                        method="POST">
+                                                                        <button class="delete">Delete</button>
+                                                                    </form>
+                                                                    <%}%>
+                                                            </div>
+                                                            <div class="likes">
+                                                                <% if (Array.isArray(comment.likes) &&
+                                                                    comment.likes.length>
+                                                                    0)
+                                                                    { %>
+                                                                    <form
+                                                                        action="/comment/unlikeCommentDashboard/<%= comment._id %>?_method=PUT"
+                                                                        method="POST">
+                                                                        <button><i
+                                                                                class="fa fa-thumbs-o-up liked"></i></button>
+                                                                    </form>
+                                                                    <% } else { %>
+                                                                        <form
+                                                                            action="/comment/likeCommentDashboard/<%= comment._id %>?_method=PUT"
+                                                                            method="POST">
+                                                                            <button><i
+                                                                                    class="fa fa-thumbs-o-up"></i></button>
+                                                                        </form>
+                                                                        <% } %>
+                                                                            <span class="count">
+                                                                                <%= comment.likes ? comment.likes.length
+                                                                                    : 0 %>
+                                                                            </span>
+                                                            </div>
+                                                        </div>
+                            </div>
+                            <div class="edit-comment-modal"></div>
+                            <ul class="child_replay">
+                                <%- renderComments(comment.comments) %>
+                            </ul>
+                        </div>
+                    </li>
+                    <%}%>
+                        <% }); %>
+                            <% } %>
+                                <% } %>
+
+
+                                    <div class="comments text-muted">
+                                        <% if (post.comments && post.comments.length> 0) { %>
+                                            <% if (post.comments.length===1) { %>
+                                                <a class="post-comments">View all <%= post.comments.length %>
+                                                        comment</a>
+                                                <% } else { %>
+                                                    <a class="post-comments">View all <%= post.comments.length %>
+                                                            comments</a>
+                                                    <% } %>
+                                                        <% } else { %>
+                                                            <a class="post-comments">Add A Comment</a>
+                                                            <% } %>
+                                    </div>
+
+                                    <div id="comments-container" class="comments-container">
+                                        <form action="/comment/createCommentDashboard/<%= post._id %>/"
+                                            enctype="multipart/form-data" method="POST">
+                                            <div class="comments" id="comments">
+                                                <div class="comments-profile-photo">
+                                                    <img src="<%=profile.profilePic %>">
+                                                </div>
+                                                <div class="comment-utilities">
+                                                    <div class="comment_search">
+                                                        <textarea class="comment-textarea" id="comment-textarea"
+                                                            type="text" placeholder="Write a comment"
+                                                            name="comment-textarea"
+                                                            oninput="adjustInputHeight(this)"></textarea>
+                                                        <div class="comment-btns">
+                                                            <div class="comment-btns-btn">
+                                                                <a class="addCommentBtns add-comment-emoji"
+                                                                    id="add-comment-emoji">
+                                                                    <i class="fa-regular fa-face-smile"></i>
+                                                                </a>
+                                                                <a class="addCommentBtns add-comment-picture"
+                                                                    id="add-comment-picture">
+                                                                    <i class="fa-solid fa-camera"></i>
+                                                                </a>
+                                                                <input name="file" type="file" accept="image/*"
+                                                                    id="comment-image-input"
+                                                                    class="comment-image-input">
+                                                                <div class="comment-gif-container"
+                                                                    id="comment-gif-container">
+                                                                    <a class="addCommentBtns add-comment-gif"
+                                                                        id="add-comment-gif"><svg
+                                                                            xmlns="http://www.w3.org/2000/svg"
+                                                                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                                            version="1.1" x="0px" y="0px"
+                                                                            viewBox="0 0 60 75"
+                                                                            enable-background="new 0 0 60 60"
+                                                                            xml:space="preserve"
+                                                                            preserveAspectRatio="xMidYMid meet">
+                                                                            <path
+                                                                                d="M41,6H19C11.83,6,6,11.83,6,19v22c0,7.17,5.83,13,13,13h22c7.17,0,13-5.83,13-13V19C54,11.83,48.17,6,41,6z M26,33  c0,3.31-2.69,6-6,6s-6-2.69-6-6v-6c0-3.31,2.69-6,6-6c0.81,0,1.6,0.16,2.34,0.47c0.5,0.22,0.74,0.81,0.53,1.32  c-0.22,0.51-0.81,0.74-1.31,0.53C21.06,23.11,20.54,23,20,23c-2.21,0-4,1.8-4,4v6c0,2.21,1.79,4,4,4s4-1.79,4-4v-2h-3  c-0.55,0-1-0.45-1-1s0.45-1,1-1h4c0.55,0,1,0.45,1,1V33z M32,38c0,0.55-0.45,1-1,1s-1-0.45-1-1V22c0-0.55,0.45-1,1-1s1,0.45,1,1V38z   M46,28c0.55,0,1,0.45,1,1s-0.45,1-1,1h-7v8c0,0.55-0.45,1-1,1s-1-0.45-1-1V22c0-0.55,0.45-1,1-1h8c0.55,0,1,0.45,1,1s-0.45,1-1,1  h-7v5H46z" />
+                                                                        </svg></a>
+                                                                    <div class="comment-gif-tooltip"
+                                                                        id="comment-gif-tooltip">
+                                                                        <div class="comment-gif-row-search">
+                                                                            <i
+                                                                                class="fa-solid fa-magnifying-glass comment-gif-search-icon"></i>
+                                                                            <input type="text"
+                                                                                id="gifCommentSearchInput"
+                                                                                class="gifCommentSearchInput"
+                                                                                placeholder="Search GIFs">
+                                                                        </div>
+                                                                        <div id="gifCommentResults"
+                                                                            class="gifCommentResults">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="addCommentBtn add-comment-to-post-btn"
+                                                                id="add-comment-to-post-btn">
+                                                                <button type="submit" value="Upload"
+                                                                    class="fa-solid fa-paper-plane"></button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="comments-placeholder" id="comments-placeholder">
+                                                <div class="comments-picture-placeholder"
+                                                    id="comments-picture-placeholder">
+                                                    <img src="" alt="">
+                                                    <a><i class="fa-solid fa-circle-xmark"></i></a>
+                                                </div>
+                                                <div class="comments-gif-placeholder" id="comments-gif-placeholder">
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <!-- ---------------- COMMENT RESPONSES ------------ -->
+                                        <% comments.forEach((comment, index)=> {%>
+                                            <div class="comment-row" id="comment-row">
+                                                <ul id="list_comment" class="comments-list">
+                                                    <%if(comment.deleted===true){%>
+                                                        <li class="box_result comment-response-row">
+                                                            <div class="empty-avatar_comment"></div>
+                                                            <div class="result_comment">
+                                                                <div class="result_comment-container deleted-container">
+                                                                    <div class="result_comment-header">
+                                                                        <p class="comment-deleted">
+                                                                            <%= comment.caption %>
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                                <ul class="child_replay">
+                                                                    <%- renderComments(comment.comments) %>
+                                                                </ul>
+                                                            </div>
+                                                        </li>
+                                                        <%} else {%>
+                                                            <li class="box_result comment-response-row">
+                                                                <div class="avatar_comment">
+                                                                    <img src="<%= comment.userProfile.profilePic %>"
+                                                                        alt="Profile-Picture" />
+                                                                </div>
+                                                                <div class="result_comment">
+                                                                    <div class="result_comment-container">
+                                                                        <% if (comment.caption) { %>
+                                                                            <div class="result_comment-header">
+                                                                                <h4>
+                                                                                    <%= comment.userProfile.fullName %>
+                                                                                </h4>
+                                                                                <p>
+                                                                                    <%= comment.caption %>
+                                                                                </p>
+                                                                            </div>
+                                                                            <% } else { %>
+                                                                                <div
+                                                                                    class="result_comment-header-noText">
+                                                                                    <h4>
+                                                                                        <%= comment.userProfile.fullName
+                                                                                            %>
+                                                                                    </h4>
+                                                                                </div>
+                                                                                <% } %>
+                                                                                    <% if (comment.mediaType==='image' )
+                                                                                        { %>
+                                                                                        <div class="image-container">
+                                                                                            <img src="<%= comment.photo.image %>"
+                                                                                                alt="<%= comment.photo.cloudinary %>">
+                                                                                        </div>
+                                                                                        <% } else if
+                                                                                            (comment.mediaType==='gif' )
+                                                                                            { %>
+                                                                                            <div class="gif-container">
+                                                                                                <img src="<%= comment.gif.image %>"
+                                                                                                    alt="<%= comment.gif.cloudinary %>">
+                                                                                            </div>
+                                                                                            <% } %>
+                                                                                                <div
+                                                                                                    class="tools_comment">
+                                                                                                    <div class="time">
+                                                                                                        <span
+                                                                                                            class="posted-time">
+                                                                                                            <% if
+                                                                                                                (comment.updatedAt>
+                                                                                                                comment.createdAt)
+                                                                                                                {
+                                                                                                                %>
+                                                                                                                UPDATED
+                                                                                                                <%- comment.formattedUpdatedAt.toUpperCase()
+                                                                                                                    %>
+                                                                                                                    <% } else
+                                                                                                                        {
+                                                                                                                        %>
+                                                                                                                        <%- comment.formattedCreatedAt.toUpperCase()
+                                                                                                                            %>
+                                                                                                                            <% }
+                                                                                                                                %>
+                                                                                                        </span>
+                                                                                                    </div>
+                                                                                                    <div
+                                                                                                        class="tools-btn">
+                                                                                                        <a class="reply-dashboard"
+                                                                                                            data-user-profile-pic="<%= comment.userProfile.profilePic %>"
+                                                                                                            data-post-id="<%= post._id %>"
+                                                                                                            data-comment-id="<%= comment._id %>">Reply</a>
+                                                                                                        <%if
+                                                                                                            (comment.user._id==user.id){%>
+                                                                                                            <span
+                                                                                                                aria-hidden="true">
+                                                                                                                ·
+                                                                                                            </span>
+                                                                                                            <a class="edit-dashboard"
+                                                                                                                data-post-id="<%= post._id %>"
+                                                                                                                data-comment-id="<%= comment._id %>"
+                                                                                                                data-comment-caption="<%= comment.caption%>"
+                                                                                                                data-comment-photo="<%=comment.photo.image%>"
+                                                                                                                data-comment-photo-cloudinary="<%=comment.photo.cloudinary%>"
+                                                                                                                data-comment-gif="<%=comment.gif.image%>"
+                                                                                                                data-comment-gif-cloudinary="<%=comment.gif.cloudinary%>">Edit</a>
+                                                                                                            <span
+                                                                                                                aria-hidden="true">
+                                                                                                                ·
+                                                                                                            </span>
+                                                                                                            <form
+                                                                                                                action="/comment/deleteCommentDashboard/<%= post._id %>/<%= comment.id %>?_method=DELETE"
+                                                                                                                method="POST">
+                                                                                                                <button
+                                                                                                                    class="delete">Delete</button>
+                                                                                                            </form>
+                                                                                                            <%}%>
+                                                                                                    </div>
+                                                                                                    <div class="likes">
+                                                                                                        <% if
+                                                                                                            (Array.isArray(comment.likes)
+                                                                                                            &&
+                                                                                                            comment.likes.length>
+                                                                                                            0)
+                                                                                                            { %>
+                                                                                                            <form
+                                                                                                                action="/comment/unlikeCommentDashboard/<%= comment._id %>?_method=PUT"
+                                                                                                                method="POST">
+                                                                                                                <button><i
+                                                                                                                        class="fa fa-thumbs-o-up liked"></i></button>
+                                                                                                            </form>
+                                                                                                            <% } else {
+                                                                                                                %>
+                                                                                                                <form
+                                                                                                                    action="/comment/likeCommentDashboard/<%= comment._id %>?_method=PUT"
+                                                                                                                    method="POST">
+                                                                                                                    <button><i
+                                                                                                                            class="fa fa-thumbs-o-up"></i></button>
+                                                                                                                </form>
+                                                                                                                <% } %>
+                                                                                                                    <span
+                                                                                                                        class="count">
+                                                                                                                        <%= comment.likes
+                                                                                                                            ?
+                                                                                                                            comment.likes.length
+                                                                                                                            :
+                                                                                                                            0
+                                                                                                                            %>
+                                                                                                                    </span>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                    </div>
+                                                                    <div class="edit-comment-modal"></div>
+                                                                    <ul class="child_replay">
+                                                                        <%- renderComments(comment.comments) %>
+                                                                    </ul>
+                                                                </div>
+                                                            </li>
+                                                            <%}%>
+                                                </ul>
+                                            </div>
+                                            <%})%>
+                                    </div>

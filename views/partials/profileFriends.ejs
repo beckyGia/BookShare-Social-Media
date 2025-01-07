@@ -1,0 +1,65 @@
+<section class="content-info" id="content2">
+    <div class="friends-content">
+        <div class="title">
+            <h2>Friends ( <%= followingList.length %> )</h2>
+        </div>
+        <!------------------ FRIENDS LIST -------------->
+        <div class="friendLists">
+            <% followingList.forEach((friend, index)=> {%>
+                <!------------------ FRIEND 1 -------------->
+                <div class="single-friend">
+                    <div class="single-friend-inner">
+                        <div class="friend-profile-photo">
+                            <img src="<%=friend.followingProfile.profilePic%>">
+                            <a class="friend-profile-link" href="/profile/<%=friend.followingProfile.user%>">
+                                <p class="text-muted">@<%=friend.followingUserName.userName%>
+                                </p>
+                            </a>
+                        </div>
+                        <div class="friend-handle">
+                            <h4>
+                                <%=friend.followingProfile.fullName%>
+                            </h4>
+                            <div class="friend-handle-sub">
+                                <a class="friends-count" data-tooltip="<% if (friend.mutualFriendsCount > 0) { %>
+                                  <% for (let i = 0; i < friend.mutualFriendsProfiles.length; i++) { %>
+                                      <%= friend.mutualFriendsProfiles[i].userName.userName %>
+                                    <% if (i < friend.mutualFriendsProfiles.length - 1) { %> | <% } %>
+                                  <% } %>
+                                <% } else { %>
+                                  No mutual friends
+                                <% } %>">
+                                    <% if (friend.mutualFriendsCount> 0) { %>
+                                        <%= friend.mutualFriendsCount %> mutual friends
+                                            <% } else { %>
+                                                No mutual friends
+                                                <% } %>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="ellipsis-popup-profile">
+                            <i class="fa-solid fa-ellipsis"></i>
+                            <div class="myDropdown dropdown-content">
+                                <div class="dropdown-link">
+                                    <p><i class="pIcons fa-solid fa-user"></i> <a
+                                            href="/profile/<%=friend.followingProfile.user%>">Visit Profile</a>
+                                    </p>
+                                </div>
+                                <div class="dropdown-link">
+                                    <p><i class="pIcons fa-solid fa-user-xmark"></i> <a>Unfriend
+                                            <%=friend.followingProfile.firstName%>
+                                        </a>
+                                    </p>
+                                </div>
+                                <div class="dropdown-link">
+                                    <p><i class="pIcons fa-solid fa-circle-xmark"></i> <a class="exit-button">Exit</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <%})%>
+        </div>
+    </div>
+</section>

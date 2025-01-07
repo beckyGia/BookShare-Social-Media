@@ -1,0 +1,248 @@
+<section class="content-info" id="content1">
+    <div class="main-contents">
+        <div class="intro">
+            <div class="intro-title">
+                <h4>Introduction</h4>
+            </div>
+            <div class="intro-main">
+                <p class="intro-gender"><span class="intro-gender-title">Gender:</span>
+                    <%= usersProfile.gender %>
+                </p>
+                <p class="intro-pronouns"><span class="intro-pronouns-title">Pronouns:</span>
+                    <% if(usersProfile.pronouns=='Feminine' ) {%>
+                        She/Her
+                        <% } else if (usersProfile.pronouns=='Masculine' ) { %>
+                            He/Him
+                            <%} else if (usersProfile.pronouns=="Neutral" ) { %>
+                                They/Them
+                                <% } %>
+                </p>
+                <p class="intro-birthday"><span class="intro-birthday-title">Birthday:</span>
+                    <%= birthDate %>
+                </p>
+                <p class="intro-bio"><span class="intro-bio-title">Bio:</span>
+                    <%= usersProfile.bio %>
+                </p>
+
+                <% if (usersProfile.hobbies && usersProfile.hobbies.length> 0) { %>
+                    <p class="intro-hobbies">
+                        <span class="intro-hobbies-title">Hobbies:</span>
+                        <%= usersProfile.hobbies.map((hobby, index)=> index === usersProfile.hobbies.length - 1 ? hobby
+                            :
+                            hobby + ', ').join('')
+                            %>
+                    </p>
+                    <% } else { %>
+                        <p class="intro-hobbies"><span class="intro-hobbies-title">Hobbies:</span> No hobbies
+                            listed</p>
+                        <% } %>
+            </div>
+            <div class="profile-sidebar">
+                <a class="menu-item" id="display" data-tip="Display">
+                    <span><i class="uil uil-palette"></i></span>
+                    <h3>Display</h3>
+                </a>
+            </div>
+
+        </div>
+        <!------------------ POSTS -------------->
+        <div class="main-post">
+            <!--------------POST MODAL ------------->
+
+            <!------------------ FEEDS -------------->
+            <div class="feeds">
+                <% posts.forEach((post, index)=> { %>
+                    <%if(post.status==="Public" || post.status==='Friends' && isFollowed){%>
+                        <!------------------ FEED -------------->
+                        <div class="feed">
+                            <div class="head">
+                                <div class="user">
+                                    <div class="profile-photo">
+                                        <img src="<%= post.userProfile.profilePic%>" alt="Profile-Picture">
+                                    </div>
+                                    <div class="ingo">
+                                        <h3>
+                                            <%= post.userProfile.fullName%>
+                                        </h3>
+                                        <small>
+                                            <% if (post.updatedAt> post.createdAt) { %>
+                                                UPDATED <%- post.formattedUpdatedAt.toUpperCase() %>
+                                                    <% } else { %>
+                                                        <%- post.formattedCreatedAt.toUpperCase() %>
+                                                            <% } %>
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <% if (post.mediaType==='image' ) { %>
+                                <div class="photo">
+                                    <img src="<%= post.photo.image%>"
+                                        alt="Post #<%=postNumbers[index]+1%> containing an image">
+                                </div>
+                                <%} else if(post.mediaType==='book' ) {%>
+                                    <div class="photo-book">
+                                        <% if (post.user.toString()!==user._id.toString()) {%>
+                                            <div class="add-book-post">
+                                                <form action="/books/addReadingPostDashboard" method="POST"
+                                                    enctype="multipart/form-data">
+                                                    <input type="hidden" name="bookTitle" class="editBookTitle"
+                                                        value="<%= post.book.title%>">
+                                                    <input type="hidden" name="bookAuthor" class="editBookAuthor"
+                                                        value="<%= post.book.author%>">
+                                                    <input type="hidden" class="editBookSynopsis" name="bookSynopsis"
+                                                        value="<%= post.book.synopsis%>">
+                                                    <input type="hidden" name="bookCoverPhoto"
+                                                        value="<%= post.book.bookCoverPhoto%>"
+                                                        class="editBookCoverPhoto">
+                                                    <input type="hidden" name="bookGenres"
+                                                        value="<%= post.book.genres%>" class="editBookGenres">
+
+                                                    <%if (allBooks.some(book=> book.title === post.book.title))
+                                                        {%>
+                                                        <!-- Show checkmark if the book is already added -->
+                                                        <a class="book-added" aria-label="Book Has Been Added">
+                                                            <i class="fa-solid fa-check"></i>
+                                                        </a>
+                                                        <% } else { %>
+                                                            <button aria-label="Add Book" class="add-book-post-btn"
+                                                                type="submit" value="Save">
+                                                                <!-- Show plus icon if the book is not added -->
+                                                                <i class="fa-solid fa-circle-plus"></i>
+                                                            </button>
+                                                            <% } %>
+                                                </form>
+                                            </div>
+                                            <%}%>
+                                                <div class="profile-book-cover">
+                                                    <div>
+                                                        <a target="_blank">
+                                                            <div class="bk-book book-1 bk-bookdefault">
+                                                                <div class="bk-front">
+                                                                    <div class="bk-cover">
+                                                                        <h2><img src="<%= post.book.bookCoverPhoto%>"
+                                                                                alt="Post #<%=postNumbers[index]+1%> containing a book">
+                                                                        </h2>
+                                                                    </div>
+                                                                    <div class="bk-cover-back"></div>
+                                                                </div>
+                                                                <div class="bk-back"></div>
+                                                                <div class="bk-right"></div>
+                                                                <div class="bk-left">
+                                                                    <h2><span class="title">
+                                                                            <%=post.book.title%>
+                                                                        </span> by <span class="author">
+                                                                            <%=post.book.author%>
+                                                                        </span></h2>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                    </div>
+                                    <%} else if(post.mediaType==='gif' ) {%>
+                                        <div class="photo-gif">
+                                            <img src="<%= post.gif.image%>" alt="Post containing a gif">
+                                        </div>
+                                        <%}%>
+
+                                            <div class="caption">
+                                                <p class="post-caption"><b>
+                                                        <%= post.userProfile.fullName%>
+                                                    </b>
+                                                    <%= post.caption%>
+                                                </p>
+                                            </div>
+                                            <div class="liked-by">
+                                                <% if (post.likes.length> 0) { %>
+                                                    <% for (let i=0; i < Math.min(3, post.likes.length); i++) { %>
+                                                        <span>
+                                                            <img src="<%= post.likes[i].userInfo.profilePic %>"
+                                                                alt="<%= post.likes[i].userInfo.fullName %>" />
+                                                        </span>
+                                                        <% } %>
+                                                            <p>
+                                                                Liked by
+                                                                <% if (post.likes.length> 0) { %>
+                                                                    <b>
+                                                                        <%= post.likes[0].userInfo.fullName %>
+                                                                    </b>
+                                                                    <% } %>
+                                                                        <% if (post.likes.length> 1) { %>
+                                                                            and <b>
+                                                                                <%= post.likes.length - 1 %> others
+                                                                            </b>
+                                                                            <% } %>
+                                                            </p>
+                                                            <% } %>
+                                            </div>
+
+                                            <div class="action-buttons">
+                                                <div class="interaction-buttons">
+                                                    <span>
+                                                        <% if (Array.isArray(post.likes) && post.likes.some(like=>
+                                                            like.post.toString() === post._id.toString()
+                                                            &&
+                                                            like.user.toString() ===
+                                                            user._id.toString())) { %>
+                                                            <form
+                                                                action="/post/unlikePostUserProfile/<%= post._id %>/<%= usersProfile.user %>?_method=PUT"
+                                                                method="POST">
+                                                                <button class="post-likes"><i
+                                                                        class="fa-solid fa-heart liked"></i></button>
+                                                            </form>
+                                                            <% } else { %>
+                                                                <form
+                                                                    action="/post/likePostUserProfile/<%= post._id %>/<%= usersProfile.user %>?_method=PUT"
+                                                                    method="POST">
+                                                                    <button class="post-likes"><i
+                                                                            class="fa-regular fa-heart"></i></button>
+                                                                </form>
+                                                                <% } %>
+                                                    </span>
+                                                    <span>
+                                                        <a class="comment-post-btn"><i
+                                                                class="fa-regular fa-comment"></i></a>
+                                                    </span>
+                                                    <span>
+                                                        <a><i class="fa-regular fa-share-from-square"></i></a>
+                                                    </span>
+                                                </div>
+                                                <div class="bookmark">
+                                                    <span>
+                                                        <% if (bookmarks.some(bookmark=> bookmark.post.toString()
+                                                            ===
+                                                            post._id.toString())) { %>
+                                                            <% bookmarks.forEach(bookmark=> { %>
+                                                                <% if (bookmark.post.toString()===post._id.toString()) {
+                                                                    %>
+                                                                    <form
+                                                                        action="/bookmark/removeBookMarkProfile/<%= bookmark._id %>/<%= post.user %>?_method=DELETE"
+                                                                        method="POST">
+                                                                        <button><i
+                                                                                class="fa-solid fa-bookmark bookMarked"></i></button>
+                                                                    </form>
+                                                                    <% } %>
+                                                                        <% }) %>
+                                                                            <% } else { %>
+                                                                                <form
+                                                                                    action="/bookmark/createBookMarkProfile/<%= post._id %>/<%= post.user %>"
+                                                                                    method="POST">
+                                                                                    <button><i
+                                                                                            class="fa-regular fa-bookmark"></i></button>
+                                                                                </form>
+                                                                                <% } %>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <%- include('./profileUserComments', { post: post, comments: post.comments,
+                                                user:user, usersProfile: usersProfile, index: index }) -%>
+                        </div>
+                        <%}%>
+                            <%})%>
+                                <!------------END OF FEEDS------->
+            </div>
+            <!------------END OF FEEDS------->
+        </div>
+    </div>
+</section>

@@ -1,0 +1,1230 @@
+/*=============== GOOGLE FONTS ===============*/
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+/*=============== VARIABLES CSS ===============*/
+:root {
+  --primary-color-hue: 202;
+  --dark-color-lightness: 17%;
+  --light-color-lightness: 95%;
+  --white-color-lightness: 100%;
+  --primary-color-lightness: 64%;
+
+  --color-text: #000;
+  --color-white: hsl(
+    var(--primary-color-hue),
+    30%,
+    var(--white-color-lightness)
+  );
+  --color-light: hsl(
+    var(--primary-color-hue),
+    30%,
+    var(--light-color-lightness)
+  );
+  --color-gray: hsl(var(--primary-color-hue), 15%, 65%);
+  --color-lightgray: hsl(var(--primary-color-hue), 30%, 90%);
+  --color-primary: hsl(
+    var(--primary-color-hue),
+    75%,
+    var(--primary-color-lightness)
+  );
+  --color-secondary: hsl(var(--primary-color-hue), 100%, 90%);
+  --color-success: hsl(120, 95%, 65%);
+  --color-danger: hsl(0, 95%, 65%);
+  --color-red: hsl(0, 88%, 51%);
+  --color-dark: hsl(var(--primary-color-hue), 30%, var(--dark-color-lightness));
+  --color-black: hsl(var(--primary-color-hue), 30%, 10%);
+
+  --border-radius: 2rem;
+  --book-post-bg: url("/public/img/light-wood.jpg");
+  --book-post-color: hsl(25, 19%, 88%);
+  --card-border-radius: 1rem;
+  --btn-padding: 0.6rem 2rem;
+  --search-padding: 0.6rem 1rem;
+  --card-padding: 1rem;
+
+  --sticky-top-left: 5.4rem;
+  --sticky-top-right: -18rem;
+
+  --slider-shadow: inset 0 1px 1px #ddd, 0 2px 3px #ccc;
+
+  /* Setting the font weight. */
+  --fw-black: 800;
+  --fw-extra-bold: 800;
+  --fw-bold: 700;
+  --fw-semi-bold: 600;
+  --fw-medium: 500;
+  --fw-regular: 400;
+  --fw-light: 300;
+  --fw-extra-light: 200;
+  --fw-thin: 100;
+}
+
+:root[data-theme="dim"] {
+  --primary-color-hue: 202;
+  --dark-color-lightness: 95%;
+  --light-color-lightness: 15%;
+  --white-color-lightness: 20%;
+  --primary-color-lightness: 40%;
+
+  --color-text: #fff;
+  --color-white: hsl(
+    var(--primary-color-hue),
+    30%,
+    var(--white-color-lightness)
+  );
+  --color-light: hsl(
+    var(--primary-color-hue),
+    30%,
+    var(--light-color-lightness)
+  );
+  --color-gray: hsl(var(--primary-color-hue), 15%, 65%);
+  --color-lightgray: hsl(var(--primary-color-hue), 30%, 10%);
+  --color-primary: hsl(
+    var(--primary-color-hue),
+    75%,
+    var(--primary-color-lightness)
+  );
+  --color-secondary: hsl(var(--primary-color-hue), 100%, 90%);
+  --color-success: hsl(120, 95%, 65%);
+  --color-danger: hsl(0, 95%, 65%);
+  --color-red: hsl(0, 88%, 51%);
+  --color-dark: hsl(var(--primary-color-hue), 30%, var(--dark-color-lightness));
+  --color-black: hsl(var(--primary-color-hue), 30%, 10%);
+}
+
+:root[data-theme="dark"] {
+  --primary-color-hue: 202;
+  --dark-color-lightness: 95%;
+  --light-color-lightness: 0%;
+  --white-color-lightness: 10%;
+  --primary-color-lightness: 30%;
+
+  --color-text: #fff;
+  --color-white: hsl(
+    var(--primary-color-hue),
+    30%,
+    var(--white-color-lightness)
+  );
+  --color-light: hsl(
+    var(--primary-color-hue),
+    30%,
+    var(--light-color-lightness)
+  );
+  --color-gray: hsl(var(--primary-color-hue), 15%, 65%);
+  --color-lightgray: hsl(var(--primary-color-hue), 30%, 5%);
+  --color-primary: hsl(
+    var(--primary-color-hue),
+    75%,
+    var(--primary-color-lightness)
+  );
+  --color-secondary: hsl(var(--primary-color-hue), 100%, 90%);
+  --color-success: hsl(120, 95%, 65%);
+  --color-danger: hsl(0, 95%, 65%);
+  --color-red: hsl(0, 88%, 51%);
+  --color-dark: hsl(var(--primary-color-hue), 30%, var(--dark-color-lightness));
+  --color-black: hsl(var(--primary-color-hue), 30%, 10%);
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  outline: 0;
+  box-sizing: border-box;
+  border: none;
+  text-decoration: none;
+  list-style: none;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  color: var(--color-dark);
+  background-color: var(--color-light);
+  overflow-x: hidden;
+}
+
+/* GENERAL STYLES */
+.container {
+  width: 85%;
+  margin: 0 auto;
+}
+
+img {
+  display: block;
+  width: 100%;
+}
+
+.btn {
+  display: inline-block;
+  padding: var(--btn-padding);
+  font-weight: var(--fw-medium);
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: all 300ms ease;
+  font-size: 0.9rem;
+}
+
+.btn:hover {
+  opacity: 0.8;
+}
+
+.btn-primary {
+  background: var(--color-primary);
+  color: white;
+}
+
+.text-bold {
+  font-weight: var(--fw-medium);
+}
+
+.text-muted {
+  color: var(--color-gray);
+}
+
+.text-muted:hover {
+  color: var(--color-primary);
+}
+
+/*===================== MAIN =====================*/
+main {
+  position: relative;
+  top: 5.4rem;
+}
+
+.layoutA .container {
+  display: grid;
+  grid-template-columns: 18vw auto;
+  column-gap: 2rem;
+  position: relative;
+}
+
+/* ------------------- BOOKS ------------------- */
+.middle .books .single-book {
+  background: var(--color-white);
+  border-radius: var(--card-border-radius);
+  padding: var(--card-padding);
+  margin: 1rem 0;
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+/*===================== INDIVIDUAL BOOK =====================*/
+/* .middle .books {
+  background: var(--color-white);
+} */
+
+.book {
+  /* height: 25rem; */
+  display: flex;
+  flex-direction: column;
+  background: var(--color-light);
+  padding: var(--card-padding);
+  border-radius: var(--card-border-radius);
+  position: relative;
+}
+
+.book .edit-popup {
+  position: relative;
+}
+
+.book .edit-popup .uil {
+  position: absolute;
+  top: 0.5rem;
+  right: 1rem;
+  cursor: pointer;
+}
+
+.book .edit-popup .uil:hover {
+  color: var(--color-primary);
+}
+
+.book .edit-popup .book-dropdown-content {
+  display: none;
+  position: absolute;
+  background: var(--color-white);
+  top: 2rem;
+  right: -12%;
+  padding: 0.6rem;
+  border-radius: var(--card-border-radius);
+  width: 8rem;
+  z-index: 10;
+}
+
+.book .edit-popup .book-dropdown-content .dropdown-link {
+  color: var(--color-text);
+  font-size: 0.8rem;
+  padding: 0.2rem;
+}
+
+.book .edit-popup .book-dropdown-content .dropdown-link:hover {
+  background: var(--color-light);
+  border-radius: 0.3rem;
+}
+
+.book .edit-popup .book-dropdown-content button {
+  background: none;
+}
+
+.book .edit-popup .book-dropdown-content a,
+.book .edit-popup .book-dropdown-content button {
+  color: var(--color-text);
+  font-size: 0.8rem;
+}
+
+.book .edit-popup .book-dropdown-content .bookIcons {
+  margin-right: 0.2rem;
+}
+
+.book .edit-popup .book-dropdown-content a:hover,
+.book .edit-popup .book-dropdown-content button:hover {
+  color: var(--color-primary);
+  cursor: pointer;
+}
+
+.book .favBtn {
+  padding: 0.8rem;
+  background-color: var(--color-lightgray);
+  border-radius: 0.5rem;
+  /* opacity: 0.8; */
+  position: absolute;
+  right: 0.5rem;
+  top: 0.5rem;
+  font-size: 1.5rem;
+  color: var(--color-gray);
+  cursor: pointer;
+  box-shadow: 1px 1px 1px var(--color-gray);
+}
+
+.book .favorited {
+  background: rgba(240, 20, 20, 0.2);
+  color: var(--color-red);
+  box-shadow: none;
+}
+
+.book .book-title {
+  font-size: 2rem;
+  text-align: center;
+}
+
+.book .book-author {
+  font-size: 1rem;
+  text-align: center;
+}
+
+.book .book-section {
+  display: flex;
+}
+
+.book .book-photo {
+  width: 35%;
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.8rem;
+}
+
+.book .book-photo img {
+  border-radius: var(--card-border-radius);
+  width: 100%;
+  height: 20rem;
+  aspect-ratio: 1/1;
+}
+
+.book .book-info {
+  width: 60%;
+  margin-left: 0.8rem;
+}
+
+.book-info p {
+  font-weight: var(--fw-bold);
+  margin-bottom: 0.5rem;
+}
+
+.book-info .date-done {
+  margin-bottom: 1rem;
+}
+
+.book-info .date-added,
+.book-info .date-completed {
+  font-weight: var(--fw-regular);
+}
+
+.book-info .book-caption {
+  font-weight: var(--fw-regular);
+}
+
+.book-info .book-caption .read-more-btn span,
+.book-info .book-caption .read-less-btn {
+  cursor: pointer;
+  color: var(--color-primary);
+}
+
+.book-info .book-caption .read-more-btn span:hover,
+.book-info .book-caption .read-less-btn:hover {
+  opacity: 0.8;
+}
+
+.book-genres {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+
+.book-genres .genre {
+  background: var(--color-primary);
+  color: white;
+  padding: 0.25rem 0.6rem;
+  border-radius: var(--card-border-radius);
+  margin: 0 0.3rem;
+  font-weight: var(--fw-bold);
+}
+
+.books .single-book .book-btns {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.8rem;
+}
+
+.books button {
+  cursor: pointer;
+}
+
+.books .bookBtn .fa-trash {
+  font-size: 1.5rem;
+  color: var(--color-red);
+  background-color: var(--color-light);
+}
+
+.books .bookBtn .fa-trash:hover {
+  color: var(--color-primary);
+}
+
+.books .bookBtn .fa-star {
+  font-size: 1.5rem;
+  color: var(--color-text);
+  background-color: var(--color-light);
+}
+
+.books .bookBtn .fa-star:hover {
+  color: var(--color-primary);
+}
+
+.books .bookBtn .fa-circle-check {
+  font-size: 1.6rem;
+  color: var(--color-text);
+  background-color: var(--color-light);
+}
+
+.books .bookBtn .fa-circle-check:hover {
+  color: var(--color-primary);
+}
+
+.books .book-btns a {
+  display: none;
+  cursor: pointer;
+}
+
+.single-book .rating-modal {
+  display: none;
+  position: fixed; /* Stay in place */
+  z-index: 10; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+.single-book .rating-modal .rating-card {
+  margin: auto;
+  background: var(--color-white);
+  border-radius: var(--card-border-radius);
+  width: 40%;
+  padding: 2rem;
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+#rating-card h3 {
+  font-size: 1.8rem;
+}
+
+#rating-card p {
+  margin-bottom: 1rem;
+}
+
+#rating-card .inputDiv input[type="number"] {
+  padding: 0.5rem;
+  text-align: center;
+  width: 4rem;
+  margin-right: 0.5rem;
+  border-radius: 0.2rem;
+  background: var(--color-light);
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+  /* border: none; */
+  color: var(--color-text);
+}
+
+#rating-card .inputDiv .rateButton {
+  padding: 0.5rem;
+  border-radius: 0.2rem;
+  cursor: pointer;
+  background-color: var(--color-primary);
+  color: #fff;
+}
+
+#rating-card .inputDiv .rateButton:hover {
+  opacity: 0.8;
+}
+
+#rating-card .close-rating {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.8rem;
+  font-size: 1.6rem;
+  color: var(--color-text);
+  font-weight: var(--fw-extra-bold);
+  cursor: pointer;
+}
+#rating-card .close-rating:hover {
+  color: var(--color-primary);
+}
+
+.books .book-btns a .starDiv {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* margin-top: 1rem; */
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  /* box-shadow: aliceblue 0px 30px 60px -12px inset,
+    rgba(0, 0, 0, 0.1) 0px 18px 36px -18px inset; */
+}
+
+.books .book-btns a .starDiv svg {
+  position: relative;
+  width: 2rem;
+  height: 2rem;
+  color: orange;
+}
+
+/***** CREATE/ADD BOOK *****/
+#create-book-modal {
+  display: none;
+  position: fixed; /* Stay in place */
+  z-index: 10; /* Sit on top */
+  padding-top: 2rem; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  /* overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+#create-reading-book-modal,
+#create-completed-book-modal {
+  display: none;
+  position: fixed; /* Stay in place */
+  z-index: 10; /* Sit on top */
+  padding-top: 2em; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+.newBook .create-book-btns {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  cursor: pointer;
+}
+
+.newBook .create-book-btns .book-creation-btn {
+  padding: 0.8rem 1rem;
+  background: var(--color-primary);
+  border-radius: 0.5rem;
+  margin-right: 2rem;
+  color: #fff;
+  font-weight: var(--fw-medium);
+  cursor: pointer;
+}
+
+.newBook .create-book-btns .book-creation-btn:hover {
+  opacity: 0.8;
+}
+
+.newBook {
+  margin: auto;
+  margin-top: 0;
+  background: var(--color-white);
+  border-radius: var(--card-border-radius);
+  width: 70%;
+  padding: 2rem;
+  position: relative;
+}
+
+.newBook .closeCompletedModal,
+.newBook .closeReadingModal {
+  cursor: pointer;
+}
+
+.newBook .closeCompletedModal {
+  position: absolute;
+  top: 1rem;
+  left: 1.5rem;
+}
+
+.newBook .closeReadingModal {
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+}
+
+.newBook .closeCompletedModal:hover,
+.newBook .closeReadingModal:hover {
+  color: var(--color-primary);
+}
+
+.back-to-main {
+  position: absolute;
+  cursor: pointer;
+}
+
+.back-to-main:hover {
+  color: var(--color-primary);
+}
+
+#readingBackToAddBook {
+  top: 1rem;
+  left: 1.5rem;
+}
+
+#completedBackToAddBook {
+  top: 1rem;
+  right: 1.5rem;
+}
+
+.newBook .req-red {
+  color: var(--color-danger);
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.newBook .req-red[title]:hover:after {
+  content: attr(title);
+  position: absolute;
+  background: none;
+  color: var(--color-danger);
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 12px;
+  white-space: nowrap;
+  z-index: 1;
+}
+
+.newBook h3 {
+  text-align: center;
+  font-size: 2rem;
+  color: var(--color-text);
+}
+
+.newBook .create-book-section-title,
+.editBook .create-book-section-title {
+  font-size: 1.2rem;
+  font-weight: var(--fw-bold);
+}
+
+.newBook .drop-zone,
+.editBook .edit-drop-zone {
+  width: 100%;
+  margin-top: 0.3rem;
+  margin-bottom: 1rem;
+  height: 10rem;
+  border: 2px dashed var(--color-gray);
+  /* margin: 20px; */
+  text-align: center;
+  padding: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  color: var(--color-text);
+}
+
+.newBook .imageElement,
+.editBook .editImageUpload {
+  display: none;
+}
+
+.newBook .file-list-container,
+.editBook .edit-file-list-container {
+  margin-top: 0.8rem;
+}
+
+.newBook .file-list-container .file-item,
+.editBook .edit-file-list-container .file-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.newBook .file-list-container .file-item img,
+.editBook .edit-file-list-container .file-item img {
+  max-width: 8rem;
+  max-height: 8rem;
+  margin-right: 1rem;
+}
+
+.newBook .file-list-container .remove-icon,
+.editBook .edit-file-list-container .remove-icon {
+  color: var(--color-red);
+  cursor: pointer;
+}
+
+.createNewBook .create-book-input {
+  height: 2.5rem;
+  width: 100%;
+  padding: 0.2rem 1.8rem 0.5rem 0.5rem;
+  border: 1px solid var(--color-light);
+  border-radius: 6px;
+  /* border: 2px solid var(--bg-secondary); */
+  background-color: var(--color-light);
+  color: var(--color-text);
+  font-weight: var(--fw-regular);
+  transition: border 0.4s;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+.createNewBook .create-book-input:focus {
+  border-color: var(--color-gray);
+}
+
+.createNewBook .input-box-synopsis,
+.createNewBook .input-reading-box-synopsis {
+  position: relative;
+  margin-top: 0.4rem;
+  height: 10rem;
+  width: 100%;
+  background: var(--color-white);
+  padding: 30px;
+  border-radius: 6px;
+  /* box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); */
+  margin-bottom: 0.5rem;
+}
+
+.createNewBook .input-box-synopsis textarea,
+.createNewBook .input-reading-box-synopsis textarea {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 80%;
+  width: 100%;
+  outline: none;
+  /* border: 2px solid rgba(0, 0, 0, 0.2); */
+  border: 1px solid var(--color-light);
+  background: var(--color-light);
+  border-radius: 6px;
+  resize: none;
+  padding: 0.5rem 0.5rem;
+  color: var(--color-text);
+  font-size: 1.2rem;
+  /* font-weight: var(--fw-semi-bold); */
+  /* caret-color: #007bbf; */
+}
+
+.createNewBook .input-box-synopsis textarea:focus,
+.createNewBook .input-reading-box-synopsis textarea:focus {
+  border-color: var(--color-gray);
+}
+
+.createNewBook .input-box-synopsis textarea::placeholder,
+.createNewBook .input-reading-box-synopsis textarea::placeholder {
+  color: var(--color-gray);
+  font-size: 1.2rem;
+  font-weight: var(--fw-semi-bold);
+}
+
+.createNewBook .input-box-synopsis.error textarea,
+.createNewBook .input-reading-box-synopsis.error textarea {
+  border-color: red;
+}
+
+.createNewBook .input-box-synopsis .characters,
+.createNewBook .input-reading-box-synopsis .characters {
+  position: absolute;
+  bottom: 0.5rem;
+  right: 0;
+  display: flex;
+  align-items: center;
+  display: none;
+  color: var(--color-gray);
+  font-size: 1rem;
+  font-weight: var(--fw-semi-bold);
+}
+
+.createNewBook .input-box-synopsis.active .characters,
+.createNewBook .input-reading-box-synopsis.active .characters {
+  display: block;
+}
+
+.createNewBook .input-box-synopsis.error .characters,
+.createNewBook .input-reading-box-synopsis.error .characters {
+  color: red;
+}
+
+.newBook .book-status-creation {
+  margin-bottom: 0.3rem;
+}
+
+.newBook .book-status-creation select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 100%;
+  padding: 10px 20px;
+  font-size: 1rem;
+  /* letter-spacing: 0.5px; */
+  cursor: pointer;
+  background-color: var(--color-light);
+  color: var(--fourth-color);
+  border: 1px solid var(--color-light);
+  border-radius: 5px;
+  background-image: url("../img/down-arrow-svgrepo-com.svg");
+  background-repeat: no-repeat;
+  background-size: 2rem;
+  background-position: right 1rem center;
+  outline: none;
+  /* box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.4); */
+}
+.newBook .book-status-creation select::-ms-expand {
+  display: none;
+}
+.newBook .book-status-creation select:hover {
+  border: 2px solid var(--color-primary);
+}
+.newBook .book-status-creation select option {
+  background-color: var(--color-primary);
+  letter-spacing: 1.2px;
+  font-weight: var(--fw-semi-bold);
+  font-size: 1rem;
+}
+.newBook .book-status-creation .selected {
+  display: none;
+}
+
+.newBook .book-genre-creation {
+  margin-bottom: 1.2rem;
+  margin-top: 1rem;
+}
+
+.newBook .add-genres {
+  background-color: var(--color-light);
+  border-radius: 6px;
+  padding: 0.2rem 0.8rem;
+}
+
+.newBook .add-genres li {
+  color: var(--color-text);
+  margin: 0.4rem;
+  list-style: disc;
+}
+
+.newBook .add-genres span {
+  border-bottom: 1px dashed transparent;
+}
+
+.newBook .add-genres li[data-new="true"] {
+  color: var(--color-gray);
+}
+
+.newBook .add-genres li input {
+  display: none;
+  border: 0;
+  outline: 0;
+  padding: 0;
+}
+
+.newBook .add-genres li.edit span {
+  display: none;
+}
+
+.newBook .add-genres li.edit input {
+  display: initial;
+  border-bottom: 1px dashed #000;
+  background-color: var(--color-light);
+}
+
+.newBook .book-rating-creation {
+  margin-bottom: 1rem;
+}
+
+.newBook .book-rating-creation h4 {
+  margin-bottom: 0.5rem;
+}
+
+.newBook .book-rating-creation .create-book-span {
+  font-weight: var(--fw-regular);
+  font-size: 0.8rem;
+}
+
+.newBook .book-rating-creation .inputDiv input[type="number"] {
+  padding: 0.5rem;
+  text-align: center;
+  width: 4rem;
+  margin-right: 0.5rem;
+  border-radius: 0.2rem;
+  background: var(--color-light);
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+  /* border: none; */
+  color: var(--color-text);
+}
+
+/* page two */
+#chooseBookType {
+  width: 60%;
+  overflow: hidden;
+  background: var(--color-white);
+  border-radius: var(--card-border-radius);
+  margin: auto;
+  margin-top: 0;
+  padding: 2rem;
+}
+
+.chooseBookTitle {
+  text-align: center;
+  font-size: 2.3rem;
+  margin-bottom: 2rem;
+}
+
+.choose-btns {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  cursor: pointer;
+}
+
+.choose-btn {
+  padding: 0.8rem 1rem;
+  background: var(--color-primary);
+  border-radius: 0.5rem;
+  margin-right: 2rem;
+  color: #fff;
+  font-weight: var(--fw-medium);
+  cursor: pointer;
+}
+
+.choose-btn {
+  opacity: 0.8;
+}
+
+.newBook .imageUpload {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+/******************** EDIT BOOK ************************/
+.edit-reading-book-modal {
+  display: none;
+  position: fixed; /* Stay in place */
+  z-index: 10; /* Sit on top */
+  padding-top: 2rem; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+.editBook {
+  position: relative;
+}
+
+.editBook .closeEditModal {
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  cursor: pointer;
+}
+
+.editBook .imageUpload {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+.editBook .closeEditModal:hover {
+  color: var(--color-primary);
+}
+
+.editBook .edit-book-btns {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  cursor: pointer;
+}
+
+.editBook .edit-book-btns .book-edit-btn {
+  padding: 0.8rem 1rem;
+  background: var(--color-primary);
+  border-radius: 0.5rem;
+  margin-right: 2rem;
+  color: #fff;
+  font-weight: var(--fw-medium);
+  cursor: pointer;
+}
+
+.editBook .edit-book-btns .book-edit-btn:hover {
+  opacity: 0.8;
+}
+
+.editBook {
+  margin: auto;
+  margin-top: 0;
+  background: var(--color-white);
+  border-radius: var(--card-border-radius);
+  width: 70%;
+  padding: 2rem;
+  position: relative;
+}
+
+.editBook .req-red {
+  color: var(--color-danger);
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.editBook .req-red[title]:hover:after {
+  content: attr(title);
+  position: absolute;
+  background: none;
+  color: var(--color-danger);
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 12px;
+  white-space: nowrap;
+  z-index: 1;
+}
+
+.editBook h3 {
+  text-align: center;
+  font-size: 2rem;
+  color: var(--color-text);
+}
+
+.editBook .edit-book-section-title {
+  font-size: 1.2rem;
+  font-weight: var(--fw-bold);
+}
+
+.editNewBook .edit-book-input {
+  height: 2.5rem;
+  width: 100%;
+  padding: 0.2rem 1.8rem 0.5rem 0.5rem;
+  border: 1px solid var(--color-light);
+  border-radius: 6px;
+  /* border: 2px solid var(--bg-secondary); */
+  background-color: var(--color-light);
+  color: var(--color-text);
+  font-weight: var(--fw-regular);
+  transition: border 0.4s;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+.editNewBook .edit-book-input:focus {
+  border-color: var(--color-gray);
+}
+
+.row .currentImg {
+  margin: 0.2rem 0 0.4rem 0;
+}
+
+.row .currentImg span {
+  font-weight: var(--fw-bold);
+}
+
+.editNewBook .input-box-synopsis,
+.editNewBook .input-reading-box-synopsis {
+  position: relative;
+  margin-top: 0.4rem;
+  height: 10rem;
+  width: 100%;
+  background: var(--color-white);
+  padding: 30px;
+  border-radius: 6px;
+  /* box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); */
+  margin-bottom: 0.5rem;
+}
+
+.editNewBook .input-box-synopsis textarea,
+.editNewBook .input-reading-box-synopsis textarea {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 80%;
+  width: 100%;
+  outline: none;
+  /* border: 2px solid rgba(0, 0, 0, 0.2); */
+  border: 1px solid var(--color-light);
+  background: var(--color-light);
+  border-radius: 6px;
+  resize: none;
+  padding: 0.5rem 0.5rem;
+  color: var(--color-text);
+  font-size: 1.2rem;
+  /* font-weight: var(--fw-semi-bold); */
+  /* caret-color: #007bbf; */
+}
+
+.editNewBook .input-box-synopsis textarea:focus,
+.editNewBook .input-reading-box-synopsis textarea:focus {
+  border-color: var(--color-gray);
+}
+
+.editNewBook .input-box-synopsis textarea::placeholder,
+.editNewBook .input-reading-box-synopsis textarea::placeholder {
+  color: var(--color-gray);
+  font-size: 1.2rem;
+  font-weight: var(--fw-semi-bold);
+}
+
+.editNewBook .input-box-synopsis.error textarea,
+.editNewBook .input-reading-box-synopsis.error textarea {
+  border-color: red;
+}
+
+.editNewBook .input-box-synopsis .characters,
+.editNewBook .input-reading-box-synopsis .characters {
+  position: absolute;
+  bottom: 0.5rem;
+  right: 0;
+  display: flex;
+  align-items: center;
+  display: none;
+  color: var(--color-gray);
+  font-size: 1rem;
+  font-weight: var(--fw-semi-bold);
+}
+
+.editNewBook .input-box-synopsis.active .characters,
+.editNewBook .input-reading-box-synopsis.active .characters {
+  display: block;
+}
+
+.editNewBook .input-box-synopsis.error .characters,
+.editNewBook .input-reading-box-synopsis.error .characters {
+  color: red;
+}
+
+.editBook .book-status-edit {
+  margin-bottom: 0.3rem;
+}
+
+.editBook .book-status-edit select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 100%;
+  padding: 10px 20px;
+  font-size: 1rem;
+  /* letter-spacing: 0.5px; */
+  cursor: pointer;
+  background-color: var(--color-light);
+  color: var(--fourth-color);
+  border: 1px solid var(--color-light);
+  border-radius: 5px;
+  background-image: url("../img/down-arrow-svgrepo-com.svg");
+  background-repeat: no-repeat;
+  background-size: 2rem;
+  background-position: right 1rem center;
+  outline: none;
+  /* box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.4); */
+}
+.editBook .book-status-edit select::-ms-expand {
+  display: none;
+}
+.editBook .book-status-edit select:hover {
+  border: 2px solid var(--color-primary);
+}
+.editBook .book-status-edit select option {
+  background-color: var(--color-primary);
+  letter-spacing: 1.2px;
+  font-weight: var(--fw-semi-bold);
+  font-size: 1rem;
+}
+.editBook .book-status-edit .selected {
+  display: none;
+}
+
+.editBook .book-genre-edit {
+  margin-bottom: 1.2rem;
+  margin-top: 1rem;
+}
+
+.editBook .add-genres {
+  border-radius: 6px;
+  padding: 0.2rem 0.8rem;
+}
+
+.editBook .add-genres li {
+  color: var(--color-text);
+  margin: 0.4rem;
+  list-style: disc;
+  font-size: 1rem;
+}
+
+.editBook .add-genres span {
+  border-bottom: 1px dashed transparent;
+}
+
+.editBook #genre-list li[data-new="true"] {
+  color: var(--color-gray);
+}
+
+.editBook .add-genres li input {
+  display: none;
+  border: 0;
+  outline: 0;
+  padding: 0;
+}
+
+.editBook .add-genres li.edit span {
+  display: none;
+}
+
+.editBook .add-genres li.edit input {
+  display: initial;
+  border-bottom: 1px dashed #000;
+}

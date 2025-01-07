@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%- locals.title %></title>
+    <!----======== WEBSITE ICON ======== -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+    <meta name="description" content="<%- locals.description %>">
+    <!----======== CSS ======== -->
+    <link rel="stylesheet" href="/css/normalize.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
+    <link rel="stylesheet" href="/css/profilePage.css">
+    <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/themeCustomization.css">
+    <link rel="stylesheet" href="/css/responsive.css">
+    <!-- ICONSCOUT CDN -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.6/css/unicons.css" />
+    <!-- =====Fontawesome CDN Link===== -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script>
+        function adjustInputHeight(element) {
+            element.style.height = 'auto';
+            element.style.height = (element.scrollHeight) + 'px';
+        }
+    </script>
+
+</head>
+
+<body>
+    <%- include('../partials/profileHeader.ejs') %>
+
+        <%- body %>
+
+            <script type="module" src="/js/other-profile-post.js"></script>
+            <script type="module" src="/js/other-profile-page.js"></script>
+            <script src="/js/dark-mode-user.js"></script>
+            <script src="/js/display-theme.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/@joeattardi/emoji-button@3.0.3/dist/index.min.js"></script>
+            <script>
+                // Set the global API key variable
+                window.giphyApiKey = '<%= giphyApiKey %>';
+            </script>
+</body>
+
+</html>

@@ -1,0 +1,171 @@
+<!-- ---------------- COMMENT RESPONSES ------------ -->
+<% comments.forEach((comment, index)=> {%>
+    <div class="comment-row" id="comment-row">
+        <ul id="list_comment" class="comments-list">
+            <% if (comment.mediaType==='image' ) { %>
+                <!-- Start List Comment 1 -->
+                <li class="box_result comment-response-row">
+                    <div class="avatar_comment">
+                        <img src="<%= comment.userProfile.profilePic%>" alt="Profile-Picture" />
+                    </div>
+                    <div class="result_comment">
+                        <div class="result_comment-container">
+                            <% if (comment.caption) { %>
+                                <div class="result_comment-header">
+                                    <h4>
+                                        <%= comment.userProfile.fullName%>
+                                    </h4>
+                                    <p>
+                                        <%= comment.caption%>
+                                    </p>
+                                </div>
+                                <% } else { %>
+                                    <div class="result_comment-header-noText">
+                                        <h4>
+                                            <%= comment.userProfile.fullName%>
+                                        </h4>
+                                    </div>
+                                    <%}%>
+                                        <div class="image-container">
+                                            <img src="<%= comment.photo.image%>" alt="<%= comment.photo.cloudinary%>">
+                                        </div>
+                                        <div class="tools_comment">
+                                            <div class="time">
+                                                <span class="posted-time">
+                                                    <% if (comment.updatedAt> comment.createdAt) {
+                                                        %>
+                                                        UPDATED <%- comment.formattedUpdatedAt.toUpperCase() %>
+                                                            <% } else { %>
+                                                                <%- comment.formattedCreatedAt.toUpperCase() %>
+                                                                    <% } %>
+                                                </span>
+                                            </div>
+                                            <div class="tools-btn">
+                                                <a class="reply">Reply</a>
+                                                <span aria-hidden="true"> · </span>
+                                                <a class="edit">Edit</a>
+                                                <span aria-hidden="true"> · </span>
+                                                <a class="delete">Delete</a>
+                                            </div>
+                                            <div class="likes">
+                                                <a><a><i class="fa fa-thumbs-o-up liked"></i></a></a>
+                                                <span class="count">4</span>
+                                            </div>
+                                        </div>
+                        </div>
+                        <% if (comment.comments && comment.comments.length> 0) { %>
+                            <ul class="child_replay">
+                                <% comment.comments.forEach((subComment, index)=> { %>
+                                    <%- include('profileComments', { post: post, comment: subComment, index: index })
+                                        -%>
+                                        <% }); %>
+                            </ul>
+                            <% } %>
+                    </div>
+                </li>
+                <% } else if(comment.mediaType==='gif' ) {%>
+                    <!-- Start List Comment 2 -->
+                    <li class="box_result comment-response-row">
+                        <div class="avatar_comment">
+                            <img src="<%= comment.userProfile.profilePic%>" alt="avatar" />
+                        </div>
+                        <div class="result_comment">
+                            <div class="result_comment-container">
+                                <% if (comment.caption) { %>
+                                    <div class="result_comment-header">
+                                        <h4>
+                                            <%= comment.userProfile.fullName%>
+                                        </h4>
+                                        <p>
+                                            <%= comment.caption%>
+                                        </p>
+                                    </div>
+                                    <% } else { %>
+                                        <div class="result_comment-header-noText">
+                                            <h4>
+                                                <%= comment.userProfile.fullName%>
+                                            </h4>
+                                        </div>
+                                        <%}%>
+                                            <div class="gif-container">
+                                                <img src="<%= comment.gif.image%>" alt="<%= comment.gif.cloudinary%>">
+                                            </div>
+                                            <div class="tools_comment">
+                                                <div class="time">
+                                                    <span class="posted-time">
+                                                        <% if (comment.updatedAt> comment.createdAt)
+                                                            { %>
+                                                            UPDATED <%- comment.formattedUpdatedAt.toUpperCase() %>
+                                                                <% } else { %>
+                                                                    <%- comment.formattedCreatedAt.toUpperCase() %>
+                                                                        <% } %>
+                                                    </span>
+                                                </div>
+                                                <div class="tools-btn">
+                                                    <a class="reply">Reply</a>
+                                                    <span aria-hidden="true"> · </span>
+                                                    <a class="edit">Edit</a>
+                                                    <span aria-hidden="true"> · </span>
+                                                    <a class="delete">Delete</a>
+                                                </div>
+                                                <div class="likes">
+                                                    <a><a><i class="fa fa-thumbs-o-up"></i></a></a>
+                                                    <span class="count">12</span>
+                                                </div>
+                                            </div>
+                            </div>
+                            <% if (comment.comments && comment.comments.length> 0) { %>
+                                <ul class="child_replay">
+                                    <% comment.comments.forEach((subComment, index)=> { %>
+                                        <%- include('profileComments', { post: post, comment: subComment, index: index
+                                            }) -%>
+                                            <% }); %>
+                                </ul>
+                                <% } %>
+                        </div>
+                    </li>
+                    <%} else if(comment.mediaType==="none" ){%>
+                        <!-- Start List Comment 3 -->
+                        <li class="box_result comment-response-row">
+                            <div class="avatar_comment">
+                                <img src="https://static.xx.fbcdn.net/rsrc.php/v1/yi/r/odA9sNLrE86.jpg" alt="avatar" />
+                            </div>
+                            <div class="result_comment">
+                                <div class="result_comment-container">
+                                    <div class="result_comment-header">
+                                        <h4>Skyler Greig</h4>
+                                        <p>How long does shipping take??</p>
+                                    </div>
+                                    <div class="tools_comment">
+                                        <div class="time">
+                                            <span class="posted-time">56m</span>
+                                        </div>
+                                        <div class="tools-btn">
+                                            <a class="reply">Reply</a>
+                                            <span aria-hidden="true"> · </span>
+                                            <a class="edit">Edit</a>
+                                            <span aria-hidden="true"> · </span>
+                                            <a class="delete">Delete</a>
+                                        </div>
+                                        <div class="likes">
+                                            <a><a><i class="fa fa-thumbs-o-up"></i></a></a>
+                                            <span class="count">14</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <% if (comment.comments && comment.comments.length> 0) { %>
+                                    <ul class="child_replay">
+                                        <% comment.comments.forEach((subComment, index)=> { %>
+                                            <%- include('profileComments', { post: post, comment: subComment, index:
+                                                index }) -%>
+                                                <% }); %>
+                                    </ul>
+                                    <% } %>
+                            </div>
+                        </li>
+                        <%}%>
+        </ul>
+    </div>
+
+
+    <%})%>

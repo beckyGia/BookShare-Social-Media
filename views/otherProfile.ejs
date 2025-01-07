@@ -1,0 +1,141 @@
+<main class="profile-page <%= usersProfile.profileStatus === 'Private' ? 'private-profile' : '' %>">
+    <div class="profile">
+        <div class="profile-cover-photo">
+            <img src="<%= usersProfile.coverPhoto %>" alt="profile cover photo" class="profile-cover" loading="lazy">
+        </div>
+        <div class="profile-info">
+            <div class="profile-picture">
+                <img src="<%= usersProfile.profilePic%>" alt="profile picture" class="profile-img" loading="lazy">
+            </div>
+            <div class="profile-details">
+                <div class="profile-details-info">
+                    <h1 class="profile-name">
+                        <%= usersProfile.fullName %>
+                    </h1>
+                    <div class="profile-friends">
+                        <a href="#">
+                            <p class="text-muted">@<%= usersProfile.userName.userName %>
+                            </p>
+                        </a>
+                        <a class="profile-friends-number" id="friends-link">
+                            <% if (followingList.length> 1) {%>
+                                <%= followingList.length%> friends
+                                    <%} else if (followingList.length==1) {%>
+                                        <%= followingList.length%> friend
+                                            <%} else {%>
+                                                No friends
+                                                <%}%>
+                        </a>
+                        <div id="profile-friend-list">
+                            <%followingList.slice(0, 6).forEach((follow, index)=> {%>
+                                <div class="profile-friend-pic">
+                                    <a href="/profile/<%=follow.followingProfile.user%>">
+                                        <img src="<%=follow.followingProfile.profilePic%>"
+                                            alt="<%=follow.followingUserName.userName%> Profile Picture"
+                                            class="friend-profile-img">
+                                    </a>
+                                </div>
+                                <%})%>
+                        </div>
+                    </div>
+                </div>
+                <div class="profile-btns">
+                    <% if (isFollowing) { %>
+                        <form action="/follow/unfollowUser/<%= usersProfile.user %>?_method=PUT" method="POST">
+                            <button class="removeFriendBtn"><i class="fa-solid fa-user-minus"></i> <span>Remove
+                                    Friend</span></button>
+                        </form>
+                        <% } else {%>
+                            <form action="/follow/followUser/<%= usersProfile.user %>?_method=PUT" method="POST">
+                                <button class="addFriendBtn"><i class="fa-solid fa-user-plus"></i> <span>Add
+                                        Friend</span></button>
+                            </form>
+                            <% } %>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="profile-menu">
+            <a class="tab-info" id="tab1"><i class="fa-solid fa-pen-to-square"></i> <span>Posts</span></a>
+            <a class="tab-info" id="tab2"><i class="fa-solid fa-user-group"></i> <span>Friends</span></a>
+            <a class="tab-info" id="tab3"><i class="fa-solid fa-book"></i> <span>Completed Books</span></a>
+            <a class="tab-info" id="tab4"><i class="fa-solid fa-book-open"></i> <span>Reading
+                    List</span></a>
+            <a class="tab-info" id="tab5"><i class="fa-solid fa-star"></i> <span>Favorites</span></a>
+        </div>
+    </div>
+
+    <% if (usersProfile.profileStatus==='Public' || usersProfile.profileStatus==='Private' && isFollowed) {%>
+        <div class="profile-main">
+            <%- include('partials/usersProfilePost') -%>
+                <!-- end of section 1 -->
+                <%- include('partials/profileFriends') -%>
+                    <!-- end of section 2 -->
+                    <%- include('partials/profileUserBook') -%>
+                        <!-- end of section 3 -->
+                        <%- include('partials/profileUserReading') -%>
+                            <!-- end of section 4 -->
+                            <%- include('partials/profileFavorites') -%>
+                                <!-- end of section 5 -->
+        </div>
+        <%}%>
+
+</main>
+
+<!---=========================== THEME CUSTOMIZATION ============================--->
+<div class="customize-theme" id="customize-theme">
+    <div class="card">
+        <span class="close-theme" id="close-theme">&times;</span>
+        <h2>Customize your view</h2>
+        <p class="text-muted">Manage your font size, color, and background</p>
+
+        <!----------------- FONT SIZES ------------------>
+        <div class="font-size">
+            <h4>Font Size</h4>
+            <div>
+                <h6>Aa</h6>
+                <div class="choose-size">
+                    <span class="font-size-1" data-font-size="1"></span>
+                    <span class="font-size-2" data-font-size="2"></span>
+                    <span class="font-size-3" data-font-size="3"></span>
+                    <span class="font-size-4" data-font-size="4"></span>
+                    <span class="font-size-5" data-font-size="5"></span>
+                </div>
+                <h3>Aa</h3>
+            </div>
+        </div>
+
+        <!----------------- PRIMARY COLORS ------------------>
+        <div class="color">
+            <h4>Color</h4>
+            <div class="choose-color">
+                <span class="color-1"></span>
+                <span class="color-2"></span>
+                <span class="color-3"></span>
+                <span class="color-4"></span>
+                <span class="color-5"></span>
+            </div>
+        </div>
+
+
+
+        <!----------------- BACKGROUND COLORS ------------------>
+        <div class="background">
+            <h4>Background</h4>
+            <div class="choose-bg">
+                <div class="bg-1 active">
+                    <span></span>
+                    <h5 for="bg-1">Light</h5>
+                </div>
+                <div class="bg-2">
+                    <span></span>
+                    <h5>Dim</h5>
+                </div>
+                <div class="bg-3">
+                    <span></span>
+                    <h5 for="bg-3">Lights Out</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

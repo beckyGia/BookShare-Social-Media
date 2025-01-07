@@ -1,0 +1,70 @@
+<section class="signup-form forms">
+    <div class="logo-side-signup">
+        <div class="logo-side-logo-signup">
+            <img src="/img/white-logo.png" alt="BookShare Logo" class="main-page-logo" id="main-page-logo">
+        </div>
+        <p class="logo-side-text">The Social Network For Book Lovers! </p>
+    </div>
+    <div class="auth-signup form">
+        <div class="form-content-auth">
+            <div class="header">
+                <h1 class="signup-title"><span>Create</span> An Account</h1>
+                <p class="signup-description">Get Started For Free</p>
+            </div>
+            <% if (messages && messages.errors) { %>
+                <% messages.errors.forEach( el=> { %>
+                    <div class="alert alert-danger">
+                        <%= el.msg %>
+                    </div>
+                    <% }) %>
+                        <% } %>
+                            <% if (messages && messages.info) { %>
+                                <% messages.info.forEach( el=> { %>
+                                    <div class="alert alert-info">
+                                        <%= el.msg %>
+                                    </div>
+                                    <% }) %>
+                                        <% } %>
+                                            <form action="/auth/signup" method="POST" class="sign-up-form">
+                                                <div class="user-field field input-field-sign">
+                                                    <i class="fa-solid fa-user"></i>
+                                                    <input type="test" placeholder="User Name"
+                                                        class="userName signup-input" name="userName" required>
+                                                </div>
+                                                <div class="field input-field-sign">
+                                                    <i class="fa-solid fa-envelope"></i>
+                                                    <input type="email" placeholder="Email" class="input signup-input"
+                                                        name="email" required>
+                                                    <i class='bx bx-hide eye-icon'></i>
+                                                </div>
+
+                                                <div class="field input-field-sign">
+                                                    <i class="fa-solid fa-lock"></i>
+                                                    <input type="password" placeholder="Create password"
+                                                        class="password signup-input" name="password" required>
+                                                    <i class="fa-regular fa-eye-slash signup-eye eye-icon"></i>
+                                                </div>
+
+                                                <div class="field input-field-sign">
+                                                    <i class="fa-solid fa-lock"></i>
+                                                    <input type="password" placeholder="Confirm password"
+                                                        name="confirmPassword" class="password signup-input" required>
+                                                    <i class="fa-regular fa-eye-slash signup-eye-icon eye-icon"></i>
+                                                </div>
+
+                                                <div class="field button-field">
+                                                    <button type="submit" class="signup-btn">Signup</button>
+                                                </div>
+                                            </form>
+
+                                            <div class="form-link">
+                                                <span>Already have an account? <a href="/auth/login"
+                                                        class="link login-link">Login</a></span>
+                                            </div>
+                                            <div class="form-link">
+                                                <span>Back To Home?<a href="/" class="link signup-link"> Home</a></span>
+                                            </div>
+
+        </div>
+    </div>
+</section>

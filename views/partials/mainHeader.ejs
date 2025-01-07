@@ -1,0 +1,121 @@
+<nav>
+    <div class="container">
+        <div class="nav-left">
+            <a href="/dashboard"><img src="img/black-logo.png" alt="bookshare logo" id="nav-logo" class="logo"></a>
+        </div>
+        <div class="nav-right">
+            <div class="nav-user-icon online" id="userProfile">
+                <img class="profile-pic" src="<%= profile.profilePic %>" alt="">
+            </div>
+        </div>
+    </div>
+    <!------------settings menu --------------------->
+    <div class="settings-menu">
+        <div class="settings-menu-inner">
+            <div class="user-profile">
+                <img src="<%=profile.profilePic%>">
+                <div>
+                    <p>
+                        <%= profile.fullName %>
+                    </p>
+                    <a href="/profile">See your profile</a>
+                </div>
+            </div>
+            <hr>
+            <div class="theme-header">
+                <p class="theme-header-title">Theme</p>
+                <div class="theme-switcher">
+                    <input type="radio" id="light-theme" name="themes" checked />
+                    <label for="light-theme">
+                        <span>
+                            <i class="fa-regular fa-sun"></i>Light
+                        </span>
+                    </label>
+                    <input type="radio" id="dim-theme" name="themes" />
+                    <label for="dim-theme">
+                        <span>
+                            <i class="fa-regular fa-star"></i>Dim
+                        </span>
+                    </label>
+                    <input type="radio" id="dark-theme" name="themes" />
+                    <label for="dark-theme">
+                        <span>
+                            <i class="fa-regular fa-moon"></i>Dark
+                        </span>
+                    </label>
+                    <span class="slider"></span>
+                </div>
+            </div>
+            <hr>
+            <div class="settings-links">
+                <i class="fa-solid fa-gear settings-icon"></i>
+                <a class="openStatusModal">Settings & Privacy <i class="animate-icon fa-solid fa-angle-right"></i></a>
+            </div>
+            <div class="settings-links">
+                <i class="fa-solid fa-circle-question settings-icon"></i>
+                <a>Help & Support <i class="fa-solid fa-angle-right"></i></a>
+            </div>
+            <div class="settings-links">
+                <i class="fa-solid fa-moon settings-icon"></i>
+                <a id="themeBtn">Display & Accessibility
+                    <i class="fa-solid fa-angle-right"></i></a>
+            </div>
+            <div class="settings-links">
+                <i class="fa-solid fa-right-from-bracket settings-icon"></i>
+                <a href="/auth/logout">Logout <i class="fa-solid fa-angle-right"></i></a>
+            </div>
+            <div class="settings-links">
+                <i class="fa-solid fa-heart-crack settings-icon"></i>
+                <a class="deleteAccount">Deactivate Account <i class="fa-solid fa-angle-right"></i></a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- CHANGE PROFILE STATUS MODAL -->
+<div class="settings privacyModal" id="privacyModal">
+    <form action="/profile/editProfileStatus?_method=PATCH" method="POST" class="public-private-toggle"
+        id="profileStatusForm">
+        <div class="privacyModalBody" id="privacyModalBody">
+            <h4>Change Profile Status</h4>
+            <div class="toggle-body row">
+                <input type="radio" id="Public" name="status" value="Public" <%=profile.profileStatus==='Public'
+                    ? 'checked' : '' %>>
+                <label for="Public">Public</label>
+
+                <input type="radio" id="Private" name="status" value="Private" <%=profile.profileStatus==='Private'
+                    ? 'checked' : '' %>>
+                <label for="Private">Private</label>
+            </div>
+
+            <div class="profile-status-btns">
+                <button type="submit" class="profile-status-submit" value="status">Submit</button>
+                <span class="profile-status-cancel">Cancel</span>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+
+<!-- DEACTIVATE / DELETE PROFILE MODAL -->
+<div class="deleteAccountModal" id="deleteAccountModal">
+    <form action="/profile/deleteAccount?_method=DELETE" class="modal-content" method="POST">
+        <div class="deleteProfileInfo" id="deleteProfileInfo">
+            <i class="fa-solid fa-trash"></i>
+            <h3>Deactivate Your Account</h3>
+            <div class="row">
+                <p>You'll permanently lose your</p>
+                <ul class="list-disc">
+                    <li>Profile</li>
+                    <li>Books</li>
+                    <li>Photos</li>
+                </ul>
+            </div>
+            <div class="delete-profile-btns">
+                <span class="delete-profile-cancel">Cancel</span>
+                <button type="submit" class="delete-profile-submit" value="delete">Delete Account</button>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,455 @@
+/*===================== NAVBAR =====================*/
+nav {
+  width: 100%;
+  background: var(--color-white);
+  padding: 0.7rem 0;
+  position: fixed;
+  top: 0;
+  z-index: 10;
+}
+
+nav .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+nav .container-profile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  width: 160px;
+  margin-right: 45px;
+}
+
+.nav-left,
+.nav-right {
+  display: flex;
+  align-items: center;
+}
+
+.nav-middle {
+  display: flex;
+  align-items: center;
+  font-size: 2rem;
+  width: 15%;
+}
+
+.nav-middle a {
+  color: var(--color-text);
+}
+
+.nav-middle a:hover {
+  color: var(--color-primary);
+}
+
+.nav-middle [aria-label] {
+  position: relative;
+}
+
+.nav-middle [aria-label]:after {
+  content: attr(aria-label);
+  display: none;
+  position: absolute;
+  top: 110%;
+  left: 0;
+  z-index: 50;
+  pointer-events: none;
+  padding: 8px 10px;
+  line-height: 15px;
+  white-space: nowrap;
+  text-decoration: none;
+  text-indent: 0;
+  overflow: visible;
+  font-size: 1rem;
+  color: var(--color-text);
+  background-color: var(--color-white);
+  border-radius: 0.4rem;
+  box-shadow: 1px 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.nav-middle [aria-label]:hover:after {
+  display: block;
+}
+
+.nav-user-icon .profile-pic {
+  width: 3rem;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.nav-user-icon {
+  margin-left: 30px;
+}
+
+.online {
+  position: relative;
+}
+
+.online::after {
+  content: "";
+  width: 0.8rem;
+  height: 0.8rem;
+  border: 2px solid var(--color-white);
+  border-radius: 50%;
+  background: var(--color-success);
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+/*  SETTINGS MENU */
+.settings-menu {
+  position: absolute;
+  width: 90%;
+  max-width: 350px;
+  /* height: 500px; */
+  background: var(--color-white);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+  border-radius: 4px;
+  overflow: hidden;
+  top: 108%;
+  right: 10%;
+  max-height: 0;
+  transition: max-height 0.3s;
+}
+
+.settings-menu-height {
+  max-height: 60rem;
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+}
+
+.user-profile img {
+  width: 45px;
+  border-radius: 50%;
+  margin-right: 10px;
+  object-fit: cover;
+  object-position: center;
+  aspect-ratio: 1/1;
+}
+
+.user-profile p {
+  margin-bottom: -5px;
+  font-weight: var(--fw-medium);
+  color: var(--color-dark);
+}
+
+.user-profile small {
+  font-size: 12px;
+}
+
+.user-profile a {
+  font-size: 12px;
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+.settings-menu-inner {
+  padding: 20px;
+}
+
+.feedback-icon {
+  font-size: 2rem;
+  margin-right: 1rem;
+}
+
+.settings-menu hr {
+  border: 0;
+  height: 1px;
+  background: var(--color-dark);
+  margin: 15px 0;
+}
+
+.settings-links {
+  display: flex;
+  align-items: center;
+  margin: 15px 0;
+}
+
+.settings-links .settings-icon {
+  /* width: 2rem; */
+  text-align: center;
+  margin-right: 1rem;
+  /* display: flex; */
+  font-size: 2rem;
+  /* border: 1px solid var( --color-dark);
+  border-radius: 50%;
+  padding: 0.6rem 0.65rem;
+  background-color: var( --color-dark); */
+}
+
+.settings-links a {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: space-between;
+  text-decoration: none;
+  color: var(--color-dark);
+  cursor: pointer;
+}
+
+.settings-links a:hover {
+  color: var(--color-primary);
+}
+
+/* ============ DARK MODE BTN ============ */
+/* .theme-header {
+  padding: 1rem;
+} */
+
+.theme-header-title {
+  color: var(--color-dark);
+  font-weight: var(--fw-medium);
+  margin-bottom: 0.375rem;
+}
+
+.theme-switcher {
+  margin-top: 0.5rem;
+  background-color: var(--color-gray);
+  border-radius: 10px;
+  display: flex;
+  padding: 0 3px;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  cursor: pointer;
+}
+
+.theme-switcher .slider {
+  display: block;
+  position: absolute;
+  z-index: 1;
+  width: calc((100% - 6px) / 3);
+  top: 3px;
+  transform: translatex(-110%);
+  bottom: 3px;
+  border-radius: 6px;
+  transition: 0.15s ease, transform 0.25s ease-out;
+  background-color: var(--color-white);
+  box-shadow: var(--slider-shadow);
+  cursor: pointer;
+}
+.theme-switcher input {
+  display: none;
+}
+.theme-switcher input:nth-of-type(1):checked ~ .slider {
+  transform: translateX(0);
+}
+.theme-switcher input:nth-of-type(2):checked ~ .slider {
+  transform: translateX(100%);
+}
+.theme-switcher input:nth-of-type(3):checked ~ .slider {
+  transform: translateX(200%);
+}
+.theme-switcher label {
+  position: relative;
+  z-index: 2;
+  width: calc(100% / 3);
+  color: var(--color-dark);
+  cursor: pointer;
+}
+.theme-switcher label span {
+  padding: 8px 0;
+  border-radius: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: var(--fw-medium);
+  margin: 0 0.1rem;
+  cursor: pointer;
+}
+.theme-switcher label i {
+  display: inline-block;
+  margin-right: 0.25rem;
+  width: 20px;
+  cursor: pointer;
+}
+
+/*========= CHANGE PROFILE STATUS==========*/
+.privacyModal {
+  display: none;
+  position: fixed; /* Stay in place */
+  z-index: 10; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+#privacyModalBody {
+  margin: auto;
+  background: var(--color-white);
+  border-radius: var(--card-border-radius);
+  width: 60%;
+  padding: 2rem;
+  position: relative;
+  color: var(--color-text);
+}
+
+#privacyModalBody h4 {
+  margin-bottom: 1.2rem;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+#privacyModalBody .toggle-body {
+  display: flex;
+  align-items: center; /* Center items horizontally */
+  justify-content: center;
+  margin-bottom: 2rem;
+  color: var(--color-text);
+  font-weight: var(--fw-bold);
+}
+
+.toggle-body input[type="radio"] {
+  opacity: 0;
+  position: fixed;
+  width: 0;
+}
+.toggle-body label {
+  display: inline-block;
+  background-color: var(--color-lightgray);
+  padding: 0.4rem 0.8rem;
+  font-size: 1rem;
+  border: 1px solid var(--color-gray);
+  border-radius: 4px;
+  margin-right: 1rem;
+}
+
+.toggle-body input[type="radio"]:checked + label {
+  background-color: var(--color-success);
+  border-color: var(--color-black);
+}
+
+.radio-toolbar input[type="radio"]:focus + label {
+  border: 2px dashed var(--color-gray);
+}
+
+.profile-status-btns {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.profile-status-submit,
+.profile-status-cancel {
+  padding: 0.8rem 1rem;
+  background: var(--color-primary);
+  border-radius: 0.5rem;
+  margin-right: 2rem;
+  color: #fff;
+  font-weight: var(--fw-medium);
+  cursor: pointer;
+}
+
+.profile-status-submit:hover,
+.profile-status-cancel:hover {
+  opacity: 0.8;
+}
+
+/*=========DELETE ACCOUNT==========*/
+.deleteAccountModal {
+  display: none;
+  position: fixed; /* Stay in place */
+  z-index: 10; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+#deleteProfileInfo {
+  margin: auto;
+  background: var(--color-white);
+  border-radius: var(--card-border-radius);
+  width: 60%;
+  padding: 2rem;
+  position: relative;
+  border-top: 6px var(--color-red) solid;
+  color: var(--color-text);
+}
+
+#deleteProfileInfo i {
+  position: absolute;
+  top: -2rem;
+  left: 45%;
+  color: var(--color-white);
+  background-color: var(--color-red);
+  font-size: 2rem;
+  padding: 1rem;
+  border-radius: 50%;
+}
+
+#deleteProfileInfo h3 {
+  font-size: 2rem;
+  margin-top: 0.8rem;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+#deleteProfileInfo .row {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+#deleteProfileInfo .row .list-disc li {
+  list-style: disc inside;
+  text-align: left;
+  margin-left: 0.8rem;
+}
+
+.delete-profile-btns {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.delete-profile-cancel {
+  padding: 0.8rem 1rem;
+  border: 2px var(--color-gray) solid;
+  border-radius: 0.5rem;
+  width: 40%;
+  color: var(--color-gray);
+  font-weight: var(--fw-medium);
+  cursor: pointer;
+  text-align: center;
+}
+
+.delete-profile-cancel:hover {
+  background: var(--color-lightgray);
+}
+
+.delete-profile-submit {
+  padding: 0.8rem 1rem;
+  background: var(--color-red);
+  border-radius: 0.5rem;
+  width: 40%;
+  color: var(--color-white);
+  font-weight: var(--fw-medium);
+  cursor: pointer;
+  text-align: center;
+}
+
+.delete-profile-submit:hover {
+  opacity: 0.8;
+}

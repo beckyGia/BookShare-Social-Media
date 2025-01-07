@@ -1,0 +1,220 @@
+.middle .group-main-title {
+  margin-bottom: 1rem;
+}
+
+.middle .group .request {
+  padding: 0.8rem;
+  background: var(--color-white);
+  border-radius: var(--card-border-radius);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 1rem 0;
+}
+
+.middle .group .request .group-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 0.8rem;
+}
+
+.middle .group .group-info .group-photo img {
+  object-fit: cover;
+  border-radius: var(--card-border-radius);
+  width: 100%;
+  height: 90%;
+  aspect-ratio: 16/9;
+  /* height: 400px; */
+  /* margin: 0 auto; */
+}
+
+.middle .group .group-info .group-title {
+  font-size: 2rem;
+  text-align: center;
+}
+
+.middle .group .group-info .group-text {
+  font-size: 1.1rem;
+  text-align: center;
+}
+
+.middle .group .request .action {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.middle .group .request .action .removeGroupBtn {
+  background: var(--color-red);
+}
+
+/***** CREATE/ADD GROUP *****/
+#create-group-modal,
+.action .edit-group-modal {
+  display: none;
+  position: fixed; /* Stay in place */
+  z-index: 10; /* Sit on top */
+  padding-top: 2rem; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  /* overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+.newGroup,
+.editGroup {
+  margin: auto;
+  margin-top: 0;
+  background: var(--color-white);
+  border-radius: var(--card-border-radius);
+  width: 70%;
+  padding: 2rem;
+  position: relative;
+}
+
+.newGroup .closeGroupModal,
+.editGroup .closeEditGroupModal {
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  cursor: pointer;
+}
+
+.newGroup .closeGroupModal:hover,
+.editGroup .closeEditGroupModal:hover {
+  color: var(--color-primary);
+}
+
+.newGroup .req-red,
+.editGroup .req-red {
+  color: var(--color-danger);
+  font-size: 1rem;
+  cursor: pointer;
+  font-weight: var(--fw-bold);
+}
+
+.newGroup .req-red[title]:hover:after,
+.editGroup .req-red[title]:hover:after {
+  content: attr(title);
+  position: absolute;
+  background: none;
+  color: var(--color-danger);
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 12px;
+  white-space: nowrap;
+  z-index: 1;
+}
+
+.newGroup h3,
+.editGroup h3 {
+  text-align: center;
+  font-size: 2rem;
+  color: var(--color-text);
+}
+
+.newGroup .create-group-section-name,
+.newGroup .create-group-section-title,
+.editGroup .edit-group-section-name,
+.editGroup .edit-group-section-title {
+  font-size: 1.2rem;
+  font-weight: var(--fw-bold);
+}
+
+.createNewGroup .create-group-input,
+.editNewGroup .edit-group-input {
+  height: 2.5rem;
+  width: 100%;
+  padding: 0.2rem 1.8rem 0.5rem 0.5rem;
+  border: 1px solid var(--color-light);
+  border-radius: 6px;
+  /* border: 2px solid var(--bg-secondary); */
+  background-color: var(--color-light);
+  color: var(--color-text);
+  font-weight: var(--fw-regular);
+  transition: border 0.4s;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+.createNewGroup .create-group-input:focus,
+.editNewGroup .edit-group-input:focus {
+  border-color: var(--color-gray);
+}
+
+.newGroup .group-drop-zone,
+.editGroup .edit-group-drop-zone {
+  width: 100%;
+  margin-top: 0.3rem;
+  margin-bottom: 1rem;
+  height: 10rem;
+  border: 2px dashed var(--color-gray);
+  /* margin: 20px; */
+  text-align: center;
+  padding: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  color: var(--color-text);
+}
+
+.newGroup .groupImageUpload,
+.editGroup .editGroupImageUpload {
+  display: none;
+}
+
+.newGroup .group-file-list-container,
+.editGroup .edit-group-file-list-container {
+  margin-top: 0.8rem;
+}
+
+.newGroup .group-file-list-container .file-item,
+.editGroup .edit-group-file-list-container .file-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.newGroup .group-file-list-container .file-item img,
+.editGroup .edit-group-file-list-container .file-item img {
+  max-width: 8rem;
+  max-height: 8rem;
+  margin-right: 1rem;
+}
+
+.newGroup .group-file-list-container .remove-icon,
+.editGroup .edit-group-file-list-container .remove-icon {
+  color: var(--color-red);
+  cursor: pointer;
+}
+
+.newGroup .create-group-btns,
+.editGroup .edit-group-btns {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  cursor: pointer;
+}
+
+.newGroup .create-group-btns .group-creation-btn,
+.editGroup .edit-group-btns .group-edit-btn {
+  padding: 0.8rem 1rem;
+  background: var(--color-primary);
+  border-radius: 0.5rem;
+  margin-right: 2rem;
+  color: #fff;
+  font-weight: var(--fw-medium);
+  cursor: pointer;
+}
+
+.newGroup .create-group-btns .group-creation-btn:hover,
+.editGroup .edit-group-btns .group-edit-btn:hover {
+  opacity: 0.8;
+}

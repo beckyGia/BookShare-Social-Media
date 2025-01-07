@@ -1,0 +1,274 @@
+<main class="layoutA">
+    <div class="container">
+        <!---============== LEFT ==============--->
+        <div class="left">
+            <div class="dashboard-profile">
+                <div class="profile-photo">
+                    <a href="/profile"><img src="<%= profile.profilePic%>"></a>
+                </div>
+                <div class="handle">
+                    <h4 class="dashboard-title">
+                        <%= profile.fullName%>
+                    </h4>
+                    <a class="profile-link" href="/profile" aria-label="Go To Your Profile">
+                        <p class="text-muted">@<%=profile.userName.userName%>
+                        </p>
+                    </a>
+                </div>
+            </div>
+
+            <!------------ SIDEBAR ------------->
+            <div class="sidebar">
+                <a class="menu-item" href="/dashboard" data-tip="Home">
+                    <span><i class="uil uil-home"></i></span>
+                    <h3>Home</h3>
+                </a>
+                <a href="/dashboard/bookList" class="menu-item" data-tip="Book List">
+                    <span><i class="uil uil-book"></i></span>
+                    <h3>Books Read</h3>
+                </a>
+                <a href="/dashboard/readingList" class="menu-item" data-tip="Reading List">
+                    <span><i class="uil uil-book-open"></i></span>
+                    <h3>Reading List</h3>
+                </a>
+                <a href="/dashboard/favorites" class="menu-item" data-tip="Favorites">
+                    <span><i class="uil uil-favorite"></i></span>
+                    <h3>Favorites</h3>
+                </a>
+                <a href="/dashboard/groups" class="menu-item active" data-tip="Groups">
+                    <span><i class="uil uil-user-circle"></i></span>
+                    <h3>Groups</h3>
+                </a>
+                <a href="/dashboard/bookmarks" class="menu-item" data-tip="Bookmarks">
+                    <span><i class="uil uil-bookmark"></i></span>
+                    <h3>Bookmarks</h3>
+                </a>
+                <a href="/dashboard/friends" class="menu-item" data-tip="Friends">
+                    <span><i class="uil uil-users-alt"></i></span>
+                    <h3>Friends</h3>
+                </a>
+                <a class="menu-item" id="display" data-tip="Display">
+                    <span><i class="uil uil-palette"></i></span>
+                    <h3>Display</h3>
+                </a>
+            </div>
+            <!------------------ END OF SIDEBAR -------------->
+            <a id="create-group-btn" class="btn btn-primary create-group-btn" aria-label="Create Group"><span
+                    class="symbol"><i class="fa-solid fa-plus"></i></span> <span class="words">Create Group</span></a>
+        </div>
+        <!---============== END OF LEFT ==============--->
+
+
+
+        <!---============== MIDDLE ==============--->
+        <div class="middle">
+            <div class="group-main-title">
+                <h2>Groups Joined ( <%= groupsMemberOf.length %> )</h2>
+            </div>
+            <!------------------ GROUPS JOINED 1 -------------->
+            <div class="group">
+                <% groupsMemberOf.forEach((group, index)=> {%>
+                    <!-----------GROUP JOIN ----------->
+                    <div class="request">
+                        <div class="group-info">
+                            <div class="group-photo">
+                                <img src="<%=group.groupCoverPhoto%>">
+                            </div>
+                            <div>
+                                <h5 class="group-title">
+                                    <%= group.name%>
+                                </h5>
+                                <p class="text-muted group-text"><span>
+                                        <%=group.members.length%>
+                                    </span> members</p>
+                            </div>
+                        </div>
+                        <div class="action">
+                            <% if(group.creator.toString()===user.id.toString()) {%>
+                                <button class="btn btn-primary editGroupBtn">Edit Group</button>
+
+                                <!---=========================== EDIT GROUP  ============================--->
+                                <div class="edit-group-modal" id="edit-group-modal">
+                                    <div class="editGroup">
+                                        <a class="closeEditGroupModal"><i class="fa-solid fa-x"></i></a>
+                                        <form action="/group/editGroup/<%=group.id%>?_method=PUT" method="POST"
+                                            enctype="multipart/form-data" class="editNewGroup">
+                                            <h3>Edit Group</h3>
+                                            <div class="row">
+                                                <label for="name" class="edit-group-section-name">
+                                                    <h4>Name<span class="req-red" title="Required">*</span></h4>
+                                                </label>
+                                                <input type="text" class="edit-group-input name" id="name" name="name"
+                                                    value="<%=group.name%>" required>
+                                            </div>
+                                            <div class="row">
+                                                <label for="imageUpload" class="edit-group-section-title">
+                                                    <h4>Add Group Photo<span class="req-red" title="Required">*</span>
+                                                    </h4>
+                                                </label>
+                                                <input type="file"
+                                                    class="edit-group-input form-control editGroupImageUpload"
+                                                    id="editGroupImageUpload" name="file" accept="image/*">
+                                                <div id="edit-group-drop-zone" class="edit-group-drop-zone">Drop files
+                                                    here or
+                                                    click to choose</div>
+                                                <div id="edit-group-file-list-container"
+                                                    class="edit-group-file-list-container">
+                                                    <div class="file-item"><img src="<%= group.groupCoverPhoto%>"
+                                                            alt="<%= group.cloudinary%>.jpg" class="thumbnail"><span>
+                                                            <%= group.cloudinary%>.jpg.jpg
+                                                        </span><i class="fas fa-trash removeGroupIcon remove-icon"></i>
+                                                    </div>
+                                                </div>
+                                                <!-- Add a hidden input for storing image URLs -->
+                                                <input type="hidden" name="editGroupImageUrls" id="editGroupImageUrl"
+                                                    class="editGroupImageUrl" value="<%= group.groupCoverPhoto %>" />
+                                            </div>
+                                            <div class="edit-group-btns">
+                                                <input id="group-edit-submit-btn" type="submit" value="Save"
+                                                    class="group-edit-btn" />
+                                                <a class="group-edit-btn edit-group-cancel-btn">Cancel</a>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+
+                                <form action="/group/deleteGroup/<%=group.id%>?_method=DELETE" method="POST">
+                                    <button class="btn btn-primary removeGroupBtn">Delete Group</button>
+                                </form>
+                                <%}else{%>
+                                    <form action="/group/removeGroup/<%=group.id%>?_method=PUT" method="POST">
+                                        <button class="btn btn-primary removeGroupBtn">Remove Group</button>
+                                    </form>
+                                    <%}%>
+                        </div>
+                    </div>
+                    <%})%>
+            </div>
+
+            <div class="group-main-title">
+                <h2>Join Groups ( <%= groupsNotMemberOf.length %> )</h2>
+            </div>
+            <!------------------ JOIN GROUP 1 -------------->
+            <div class="group">
+                <% groupsNotMemberOf.forEach((group, index)=> {%>
+                    <!-----------GROUP JOIN ----------->
+                    <div class="request">
+                        <div class="group-info">
+                            <div class="group-photo">
+                                <img src="<%=group.groupCoverPhoto%>">
+                            </div>
+                            <div>
+                                <h5 class="group-title">
+                                    <%= group.name%>
+                                </h5>
+                                <p class="text-muted group-text"><span>
+                                        <%=group.members.length%>
+                                    </span> members</p>
+                            </div>
+                        </div>
+                        <div class="action">
+                            <form action="/group/joinGroup/<%=group.id%>?_method=PUT" method="POST">
+                                <button class="btn btn-primary">Join Group</button>
+                            </form>
+                        </div>
+                    </div>
+                    <%})%>
+            </div>
+
+            <!------------END OF BOOK------->
+        </div>
+        <!------------END OF BOOKS------->
+        <!---============== END OF MIDDLE ==============--->
+    </div>
+</main>
+
+
+<!---=========================== CREATE GROUP  ============================--->
+<div class="create-group-modal" id="create-group-modal">
+    <div class="newGroup" id="newGroup">
+        <a class="closeGroupModal"><i class="fa-solid fa-x"></i></a>
+        <form action="/group/createGroup" method="POST" enctype="multipart/form-data" class="createNewGroup">
+            <h3>Create Group</h3>
+            <div class="row">
+                <label for="name" class="create-group-section-name">
+                    <h4>Name<span class="req-red" title="Required">*</span></h4>
+                </label>
+                <input type="text" class="create-group-input" id="name" name="name" required>
+            </div>
+            <div class="row">
+                <label for="imageUpload" class="create-group-section-title">
+                    <h4>Add Group Photo<span class="req-red" title="Required">*</span></h4>
+                </label>
+                <input type="file" name="file" class="create-group-input form-control groupImageUpload"
+                    id="groupImageUpload" accept="image/*" required>
+                <div id="group-drop-zone" class="group-drop-zone">Drop files here or click to choose</div>
+                <div id="group-file-list-container" class="group-file-list-container"></div>
+                <!-- Add a hidden input for storing image URLs -->
+                <input type="hidden" name="groupImageUrls" id="groupImageUrl" class="groupImageUrl" />
+            </div>
+            <div class="create-group-btns">
+                <input id="group-creation-submit-btn" type="submit" value="Save" class="group-creation-btn" />
+                <a class="group-creation-btn choose-group-cancel-btn">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!---=========================== THEME CUSTOMIZATION ============================--->
+<div class="customize-theme" id="customize-theme">
+    <div class="card">
+        <span class="close-theme" id="close-theme">&times;</span>
+        <h2>Customize your view</h2>
+        <p class="text-muted">Manage your font size, color, and background</p>
+
+        <!----------------- FONT SIZES ------------------>
+        <div class="font-size">
+            <h4>Font Size</h4>
+            <div>
+                <h6>Aa</h6>
+                <div class="choose-size">
+                    <span class="font-size-1" data-font-size="1"></span>
+                    <span class="font-size-2" data-font-size="2"></span>
+                    <span class="font-size-3" data-font-size="3"></span>
+                    <span class="font-size-4" data-font-size="4"></span>
+                    <span class="font-size-5" data-font-size="5"></span>
+                </div>
+                <h3>Aa</h3>
+            </div>
+        </div>
+
+        <!----------------- PRIMARY COLORS ------------------>
+        <div class="color">
+            <h4>Color</h4>
+            <div class="choose-color">
+                <span class="color-1"></span>
+                <span class="color-2"></span>
+                <span class="color-3"></span>
+                <span class="color-4"></span>
+                <span class="color-5"></span>
+            </div>
+        </div>
+
+
+
+        <!----------------- BACKGROUND COLORS ------------------>
+        <div class="background">
+            <h4>Background</h4>
+            <div class="choose-bg">
+                <div class="bg-1 active">
+                    <span></span>
+                    <h5 for="bg-1">Light</h5>
+                </div>
+                <div class="bg-2">
+                    <span></span>
+                    <h5>Dim</h5>
+                </div>
+                <div class="bg-3">
+                    <span></span>
+                    <h5 for="bg-3">Lights Out</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

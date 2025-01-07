@@ -1,0 +1,44 @@
+/* ------------------- CREATE POST ------------------- */
+.middle .add-discussion-post {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1rem;
+  padding: var(--card-padding);
+  border-radius: var(--border-radius);
+  background: var(--color-white);
+  cursor: pointer;
+  /* box-shadow: 0 10px 20px
+      rgba(var(--color-s), var(--color-s), var(--color-s), 0.19),
+    0 6px 6px rgba(var(--color-s), var(--color-s), var(--color-s), 0.23); */
+}
+
+.middle .add-discussion-post:hover {
+  opacity: 0.8;
+}
+
+.middle .add-discussion-post input[type="text"] {
+  justify-self: start;
+  width: 100%;
+  padding-left: 1rem;
+  background: transparent;
+  color: var(--color-dark);
+  margin-right: 1rem;
+  cursor: pointer;
+}
+
+.middle .add-discussion-post input[type="text"][disabled] {
+  pointer-events: none;
+}
+
+.middle .add-discussion-post input[type="text"]:hover {
+  opacity: 0.8;
+}
+
+.middle .create-post-profile-photo img {
+  width: 3rem;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  overflow: hidden;
+}

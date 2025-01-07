@@ -1,0 +1,65 @@
+<section class="login-form forms">
+    <div class="logo-side-login">
+        <div class="logo-side-logo-login">
+            <img src="/img/white-logo.png" alt="BookShare Logo" class="main-page-logo" id="main-page-logo">
+        </div>
+        <p class="logo-side-text">The Social Network For Book Lovers! </p>
+    </div>
+    <div class="auth-login form">
+        <div class="form-content-auth">
+            <div class="header">
+                <h1 class="login-title"><span>Welcome</span> Back!</h1>
+                <p class="login-description">Please login to continue.</p>
+            </div>
+            <% if (messages && messages.errors) { %>
+                <% messages.errors.forEach( el=> { %>
+                    <div class="alert alert-danger">
+                        <%= el.msg %>
+                    </div>
+                    <% }) %>
+                        <% } %>
+                            <% if (messages && messages.info) { %>
+                                <% messages.info.forEach( el=> { %>
+                                    <div class="alert alert-info">
+                                        <%= el.msg %>
+                                    </div>
+                                    <% }) %>
+                                        <% } %>
+                                            <form action="/auth/login" method="POST" class="login__form">
+                                                <div class="field input-field">
+                                                    <i class="fa-solid fa-envelope"></i>
+                                                    <input type="email" placeholder="Email"
+                                                        class="login-input login-email" id="login-email" name="email"
+                                                        required>
+                                                </div>
+
+                                                <div class="field input-field">
+                                                    <i class="fa-solid fa-lock"></i>
+                                                    <input type="password" placeholder="Password"
+                                                        class="login-password login-input password" name="password"
+                                                        required>
+                                                    <i class="fa-regular fa-eye-slash login-eye eye-icon"></i>
+                                                </div>
+
+                                                <div class="login-check">
+                                                    <input type="checkbox" class="login-check-input" id="login-check">
+                                                    <label for="" class="login-check-label" id="login-label">Remember
+                                                        me</label>
+                                                </div>
+
+                                                <div class="field button-field">
+                                                    <button type="submit" class="login-btn">Login</button>
+                                                </div>
+                                            </form>
+
+                                            <div class="form-link">
+                                                <span>Don't have an account? <a href="/auth/signup"
+                                                        class="link signup-link"> Signup</a></span>
+                                            </div>
+                                            <div class="form-link">
+                                                <span>Back To Home?<a href="/" class="link signup-link"> Home</a></span>
+                                            </div>
+        </div>
+
+    </div>
+</section>

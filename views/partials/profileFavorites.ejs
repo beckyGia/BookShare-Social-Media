@@ -1,0 +1,67 @@
+<section class="content-info" id="content5">
+    <div class="favorites-content">
+        <div class="books">
+            <% favoriteBooks.forEach(function(book, index){ %>
+                <div class="single-book">
+                    <div class="book">
+                        <div class="book-section">
+                            <div class="book-photo">
+                                <img src="<%= book.bookCoverPhoto%>">
+                            </div>
+                            <div class="book-info">
+                                <h4 class="book-title">
+                                    <%= book.title%>
+                                </h4>
+                                <h4 class="book-author">
+                                    <%= book.author%>
+                                </h4>
+                                <p>Synopsis: <span class="book-caption">
+                                        <% if (book.synopsis.length> 300) { %>
+                                            <% const truncatedSynopsis=book.synopsis.substring(0, 300); %>
+                                                <span id="truncatedSynopsis <%= book._id %>">
+                                                    <%= truncatedSynopsis.substr(0, truncatedSynopsis.lastIndexOf(' ')) %></span>
+                                                                                                <span id="fullSynopsis <%= book._id %>" style="display: none;">
+                                                    <%= book.synopsis %>
+                                                </span>
+                                                <span onclick="toggleSynopsis(' <%=book._id %>')" class="read-more-btn"
+                                                        id="readMoreBtn <%= book._id %>
+                                                            ">...
+                                                            <span>Read More</span>
+                                                </span>
+                                                <span onclick="toggleSynopsis(' <%= book._id %>')" class="read-less-btn"
+                                                    style="display: none;" id="readLessBtn <%= book._id %>">
+                                                    Read Less
+                                                </span>
+                                                <% } else { %>
+                                                    <%= book.synopsis %>
+                                                        <% } %>
+                                    </span>
+                                </p>
+                                <p class="date">Date Added: <span class="date-added">
+                                        <%=createdCompletedDates[index]%>
+                                    </span></p>
+                                <p class="date date-done">Date Completed: <span class="date-completed">
+                                        <%=completedDates[index]%>
+                                    </span>
+                            </div>
+                        </div>
+                        <div class="book-genres">
+                            <% if (books.genres && books.genres.length> 0) { %>
+                                <% books.genres.forEach((genre)=> { %>
+                                    <span class="genre">
+                                        <%= genre %>
+                                    </span>
+                                    <% }) %>
+                                        <% } %>
+                        </div>
+                        <div class="book-btns">
+                            <div class="ratingStar" style="--rating: <%= book.rating%>;"
+                                aria-label="Rating of this product is <%= book.rating%> out of 5.">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <% }) %>
+        </div>
+    </div>
+</section>
