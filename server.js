@@ -1,6 +1,7 @@
 //REQUIRED DEPENDENCIES
 const express = require("express");
 const app = express();
+const path = require("path");
 const mongoose = require("mongoose");
 const expressLayouts = require("express-ejs-layouts");
 const passport = require("passport");
@@ -49,6 +50,8 @@ app.set("layout", "./layouts/main");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+// Serve static files from the "public" directory
+app.use(express.static(path.join(__dirname, "public")));
 
 //Logging
 app.use(logger("dev"));

@@ -2,7 +2,7 @@
   "name": "bookshare-social-media",
   "version": "1.0.0",
   "description": "A Book Sharing Social Media App",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon server.js",
@@ -31,6 +31,7 @@
     "multer": "^1.4.5-lts.1",
     "passport": "^0.6.0",
     "passport-local": "^1.0.0",
+    "path": "^0.12.7",
     "picmo": "^5.8.5",
     "validator": "^13.11.0"
   },

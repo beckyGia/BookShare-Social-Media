@@ -1,4 +1,5 @@
 const passport = require("passport");
+const mongoose = require("mongoose");
 const validator = require("validator");
 const User = require("../models/User");
 const Profile = require("../models/Profile");
@@ -631,7 +632,10 @@ exports.getFriends = async (req, res) => {
     });
 
     // Extract user IDs from userItems
-    const userItemIds = userItems.map((user) => user._id);
+    const userItemIds = userItems.map(
+      (user) => new mongoose.Types.ObjectId(user._id)
+    );
+    console.log("userItemIds", userItemIds);
 
     // Logged in User Info:
     const loggedInUserId = req.user.id;
