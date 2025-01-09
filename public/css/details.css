@@ -19,7 +19,7 @@
     30%,
     var(--light-color-lightness)
   );
-  --book-post-bg: url("/public/img/light-wood.jpg");
+  --book-post-bg: url("/img/light-wood.jpg");
   --book-post-color: hsl(25, 19%, 88%);
   --color-gray: hsl(var(--primary-color-hue), 15%, 65%);
   --color-lightgray: hsl(var(--primary-color-hue), 30%, 90%);
@@ -82,6 +82,7 @@
     75%,
     var(--primary-color-lightness)
   );
+  --book-post-bg: url("/img/dark-wood.jpg");
   --color-secondary: hsl(var(--primary-color-hue), 100%, 90%);
   --color-success: hsl(120, 95%, 65%);
   --color-danger: hsl(0, 95%, 65%);
@@ -107,6 +108,7 @@
     30%,
     var(--light-color-lightness)
   );
+  --book-post-bg: url("/img/dark-wood.jpg");
   --color-gray: hsl(var(--primary-color-hue), 15%, 65%);
   --color-lightgray: hsl(var(--primary-color-hue), 30%, 5%);
   --color-primary: hsl(

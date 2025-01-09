@@ -85,6 +85,7 @@
     75%,
     var(--primary-color-lightness)
   );
+  --book-post-bg: url("/img/dark-wood.jpg");
   --color-secondary: hsl(var(--primary-color-hue), 100%, 90%);
   --color-success: hsl(120, 95%, 65%);
   --color-danger: hsl(0, 95%, 65%);
@@ -110,6 +111,7 @@
     30%,
     var(--light-color-lightness)
   );
+  --book-post-bg: url("/img/dark-wood.jpg");
   --color-gray: hsl(var(--primary-color-hue), 15%, 65%);
   --color-lightgray: hsl(var(--primary-color-hue), 30%, 5%);
   --color-primary: hsl(
@@ -482,6 +484,7 @@ main .container {
   justify-content: center;
   position: relative;
   /* background-color: #c9423e; */
+  background-image: var(--book-post-bg);
   height: 100%;
   width: 100%;
 }
