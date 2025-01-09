@@ -43,15 +43,13 @@ app.set("view engine", "ejs");
 
 //Static Folder
 app.use(expressLayouts);
-app.use(express.static("public"));
+app.use(express.static(path.join(__dirname, "public")));
 app.set("layout", "./layouts/main");
 
 //Body Parsing
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-// Serve static files from the "public" directory
-app.use(express.static(path.join(__dirname, "public")));
 
 //Logging
 app.use(logger("dev"));
